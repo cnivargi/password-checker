@@ -40,6 +40,58 @@
             animation: spin 1s linear infinite;
         }
     </style>
+<style>
+/* EmailOctopus Form Styling */
+#email-capture-form .eo-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#email-capture-form .eo-form input[type="email"] {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    color: #1f2937;
+}
+
+#email-capture-form .eo-form button[type="submit"] {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background: white;
+    color: #4F46E5;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#email-capture-form .eo-form button[type="submit"]:hover {
+    background: #f3f4f6;
+    transform: translateY(-2px);
+}
+
+@media (min-width: 768px) {
+    #email-capture-form .eo-form {
+        display: flex;
+        gap: 12px;
+    }
+    
+    #email-capture-form .eo-form input[type="email"] {
+        flex: 1;
+        margin-bottom: 0;
+    }
+    
+    #email-capture-form .eo-form button[type="submit"] {
+        width: auto;
+        padding: 14px 32px;
+    }
+}
+</style>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
     <div class="container mx-auto px-4 py-8 max-w-5xl">
@@ -390,6 +442,24 @@
             <h3 class="font-bold text-gray-700 mb-2">Strong Password Tips</h3>
             <p class="text-sm text-gray-600">10 tips for government-compliant passwords</p>
         </a>
+    </div>
+</div>
+<!-- Email Capture Section -->
+<div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl shadow-2xl p-8 mb-8 text-white">
+    <div class="text-center max-w-2xl mx-auto">
+        <h2 class="text-3xl font-bold mb-3">📬 Stay Protected</h2>
+        <p class="text-lg mb-6 opacity-90">
+            Get instant alerts about data breaches, password security tips, and government portal updates
+        </p>
+        
+        <!-- EmailOctopus Form -->
+        <div id="email-capture-form">
+            <script async src="https://eomail5.com/form/b1c7edde-b94f-11f0-a6f5-556e730c5168.js" data-form="b1c7edde-b94f-11f0-a6f5-556e730c5168"></script>
+        </div>
+        
+        <p class="text-xs mt-4 opacity-75">
+            🔒 100% Privacy Safe • No Spam • Unsubscribe Anytime
+        </p>
     </div>
 </div>
         <!-- Footer -->
