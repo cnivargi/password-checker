@@ -40,6 +40,17 @@
         .spinner {
             animation: spin 1s linear infinite;
         }
+
+        /* === Crack-time feature styles === */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.02); }
+        }
+        .pulse-animation { animation: pulse 2s infinite; }
+        .crack-time-display {
+            transition: all 0.4s ease;
+            min-height: 120px;
+        }
     </style>
 <style>
 /* EmailOctopus Form Styling */
@@ -148,6 +159,16 @@
                         <span id="eyeIcon">👁️</span>
                     </button>
                 </div>
+            </div>
+
+            <!-- === New: Time to Crack Display (inserted after password input block) === -->
+            <div id="crackTimeContainer" class="crack-time-display mb-6 rounded-xl p-6 text-center hidden">
+                <div class="text-sm font-semibold opacity-75 mb-2">⏱️ TIME TO CRACK YOUR PASSWORD</div>
+                <div id="crackTimeValue" class="text-4xl md:text-5xl font-bold mb-3">0 seconds</div>
+                <div id="crackTimeAdvice" class="text-sm opacity-90"></div>
+                <button id="shareBtn" class="mt-4 bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-semibold py-2 px-6 rounded-lg transition hidden">
+                    📤 Share Result
+                </button>
             </div>
 
             <div class="mb-6">
@@ -400,33 +421,6 @@
             </div>
         </div>
 
-        <!-- FAQ Section -->
-        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">❓ Frequently Asked Questions</h2>
-            <div class="space-y-4">
-                <div>
-                    <h3 class="font-semibold text-gray-700 mb-1">Is my password stored anywhere?</h3>
-                    <p class="text-gray-600 text-sm">No. All checks happen in your browser. Your password never leaves your device.</p>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-gray-700 mb-1">How does the leak check work?</h3>
-                    <p class="text-gray-600 text-sm">We use k-Anonymity to check against Have I Been Pwned database. Only the first 5 characters of your password's hash are sent, ensuring complete privacy.</p>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-gray-700 mb-1">What makes a password "government compliant"?</h3>
-                    <p class="text-gray-600 text-sm">Indian government portals require specific minimum standards for security. This tool checks against UIDAI, GSTN, and Income Tax portal requirements.</p>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-gray-700 mb-1">How often should I change my password?</h3>
-                    <p class="text-gray-600 text-sm">Most government portals recommend changing passwords every 90 days for maximum security.</p>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-gray-700 mb-1">Can I use the generated password on multiple sites?</h3>
-                    <p class="text-gray-600 text-sm">We recommend using unique passwords for each portal. However, our benchmark tool can show you which portals accept the same password.</p>
-                </div>
-            </div>
-        </div>
-
 <!-- Blog Section - Add this before footer -->
 <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
     <h2 class="text-2xl font-bold text-gray-800 mb-4">📚 Learn More</h2>
@@ -509,6 +503,12 @@
 
         const commonPasswords = ['password', '123456', '12345678', 'qwerty', 'abc123', 'password123', 'india123', 'welcome', 'admin'];
 
+        // === Crack-time elements ===
+        const crackTimeContainer = document.getElementById('crackTimeContainer');
+        const crackTimeValue = document.getElementById('crackTimeValue');
+        const crackTimeAdvice = document.getElementById('crackTimeAdvice');
+        const shareBtn = document.getElementById('shareBtn');
+
         togglePassword.addEventListener('click', () => {
             passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
             document.getElementById('eyeIcon').textContent = passwordInput.type === 'password' ? '👁️' : '🙈';
@@ -545,6 +545,10 @@
 
             const strength = calculateStrength(password, checks);
             updateStrengthBar(strength);
+
+            // === Inserted lines for crack-time ===
+            const crackTime = estimateCrackTime(password);
+            updateCrackTimeDisplay(crackTime);
 
             scoreDisplay.classList.remove('hidden');
             scoreNumber.textContent = strength.score;
@@ -608,6 +612,8 @@
             strengthBar.style.width = '0%';
             strengthText.textContent = '-';
             scoreDisplay.classList.add('hidden');
+            // Hide crack-time container
+            if (crackTimeContainer) crackTimeContainer.classList.add('hidden');
             document.querySelectorAll('[id^="req-"]').forEach(el => {
                 el.classList.remove('text-green-600', 'font-semibold');
                 el.classList.add('text-gray-500');
@@ -615,7 +621,7 @@
             });
         }
 
-        // Password generator
+        // === Password generator
         const portalSelect = document.getElementById('portalSelect');
         const generateBtn = document.getElementById('generateBtn');
         const regenerateBtn = document.getElementById('regenerateBtn');
@@ -710,7 +716,7 @@
             setTimeout(() => copySuccess.classList.add('hidden'), 3000);
         });
 
-        // Leak check
+        // === Leak check
         const leakPasswordInput = document.getElementById('leakPasswordInput');
         const toggleLeakPassword = document.getElementById('toggleLeakPassword');
         const checkLeakBtn = document.getElementById('checkLeakBtn');
@@ -809,7 +815,7 @@
             }
         });
 
-        // Multi-portal benchmark
+        // === Multi-portal benchmark
         const benchmarkPasswordInput = document.getElementById('benchmarkPasswordInput');
         const toggleBenchmarkPassword = document.getElementById('toggleBenchmarkPassword');
         const benchmarkBtn = document.getElementById('benchmarkBtn');
@@ -939,6 +945,127 @@
             // Scroll to results
             benchmarkResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         });
+
+        // === Time-to-crack calculator and helpers ===
+        function estimateCrackTime(password) {
+            if (!password || password.length === 0) {
+                return {
+                    formatted: '0 seconds',
+                    seconds: 0,
+                    severity: 'bg-gray-200 text-gray-600',
+                    advice: '',
+                    showShare: false
+                };
+            }
+
+            // Common password short-circuit
+            if (commonPasswords.includes(password.toLowerCase())) {
+                return {
+                    formatted: 'instantly',
+                    seconds: 0,
+                    severity: 'bg-gradient-to-r from-red-600 to-red-700 text-white pulse-animation',
+                    advice: '⚠️ CRITICAL: This is a common password! Change immediately!',
+                    showShare: false
+                };
+            }
+
+            // Pattern penalty
+            const patternPenalty = detectPatterns(password);
+
+            // Charset size
+            let charset = 0;
+            if (/[a-z]/.test(password)) charset += 26;
+            if (/[A-Z]/.test(password)) charset += 26;
+            if (/[0-9]/.test(password)) charset += 10;
+            if (/[^a-zA-Z0-9]/.test(password)) charset += 33;
+
+            // Combinations and guesses per second
+            let combinations = Math.pow(charset, password.length) / patternPenalty;
+            const guessesPerSecond = 100_000_000_000; // 100B/s
+            const seconds = combinations / (2 * guessesPerSecond);
+
+            const formatted = formatCrackTime(seconds);
+            const severity = getCrackSeverityClass(seconds);
+            const advice = getCrackAdvice(seconds);
+            const showShare = seconds > 31_536_000; // > 1 year
+
+            return { formatted, seconds, severity, advice, showShare };
+        }
+
+        function detectPatterns(password) {
+            let penalty = 1;
+            if (/012|123|234|345|456|567|678|789/.test(password)) penalty *= 1000;   // sequential numbers
+            if (/abc|bcd|cde|def|xyz/i.test(password)) penalty *= 1000;             // sequential letters
+            if (/(.)\1{2,}/.test(password)) penalty *= 100;                          // repeats
+            if (/p@ss|p4ss|passw0rd/i.test(password)) penalty *= 10000;              // common subs
+            if (/qwerty|asdfgh|zxcvbn/i.test(password)) penalty *= 1000;             // keyboard
+            return penalty;
+        }
+
+        function formatCrackTime(seconds) {
+            if (seconds < 0.001) return 'instantly';
+            if (seconds < 1) return (seconds * 1000).toFixed(2) + ' milliseconds';
+            if (seconds < 60) return seconds.toFixed(2) + ' seconds';
+            if (seconds < 3600) return (seconds / 60).toFixed(2) + ' minutes';
+            if (seconds < 86400) return (seconds / 3600).toFixed(2) + ' hours';
+            if (seconds < 31536000) return Math.floor(seconds / 86400) + ' days';
+            const years = seconds / 31536000;
+            if (years < 1000) return Math.floor(years) + ' years';
+            if (years < 1_000_000) return (years / 1000).toFixed(1) + ' thousand years';
+            if (years < 1_000_000_000) return (years / 1_000_000).toFixed(2) + ' million years';
+            if (years < 1_000_000_000_000) return (years / 1_000_000_000).toFixed(2) + ' billion years';
+            return (years / 1_000_000_000_000).toFixed(2) + ' trillion years';
+        }
+
+        function getCrackSeverityClass(seconds) {
+            if (seconds < 1) return 'bg-gradient-to-r from-red-600 to-red-700 text-white pulse-animation';
+            if (seconds < 60) return 'bg-gradient-to-r from-red-500 to-orange-600 text-white';
+            if (seconds < 3600) return 'bg-gradient-to-r from-orange-500 to-yellow-500 text-white';
+            if (seconds < 86400) return 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900';
+            if (seconds < 2592000) return 'bg-gradient-to-r from-green-400 to-green-500 text-white';
+            if (seconds < 31536000) return 'bg-gradient-to-r from-green-500 to-blue-500 text-white';
+            return 'bg-gradient-to-r from-blue-600 to-purple-600 text-white';
+        }
+
+        function getCrackAdvice(seconds) {
+            if (seconds < 1) return '⚠️ CRITICAL: Change this password immediately!';
+            if (seconds < 60) return '❌ Extremely weak. A hacker could crack this in seconds.';
+            if (seconds < 3600) return '⚠️ Weak. Could be cracked in minutes. Add more characters.';
+            if (seconds < 86400) return '😐 Fair, but could be better. Try adding more complexity.';
+            if (seconds < 2592000) return '👍 Good, but consider making it stronger for critical accounts.';
+            if (seconds < 31536000) return '✅ Strong! This password would take months to crack.';
+            if (seconds < 31536000000) return '✅ Very Strong! This password would take years to crack.';
+            return '✨ Excellent! This password is virtually uncrackable with current technology.';
+        }
+
+        function updateCrackTimeDisplay(crackTime) {
+            if (!crackTimeContainer || !crackTimeValue || !crackTimeAdvice) return;
+            crackTimeContainer.classList.remove('hidden');
+            crackTimeValue.textContent = crackTime.formatted;
+            crackTimeAdvice.textContent = crackTime.advice;
+            crackTimeContainer.className = 'crack-time-display mb-6 rounded-xl p-6 text-center ' + crackTime.severity;
+            if (shareBtn) {
+                if (crackTime.showShare) shareBtn.classList.remove('hidden');
+                else shareBtn.classList.add('hidden');
+            }
+        }
+
+        // Share button handler
+        if (shareBtn) {
+            shareBtn.addEventListener('click', () => {
+                const time = crackTimeValue ? crackTimeValue.textContent : '';
+                const text = 'My password would take ' + time + ' to crack! 🔐 Check yours at passwordchecker.in';
+                if (navigator.share) {
+                    navigator.share({ title: 'Password Strength Test', text, url: 'https://passwordchecker.in' }).catch(() => {});
+                } else if (navigator.clipboard) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        const originalText = shareBtn.textContent;
+                        shareBtn.textContent = '✓ Copied!';
+                        setTimeout(() => { shareBtn.textContent = originalText; }, 2000);
+                    });
+                }
+            });
+        }
     </script>
 </body>
 </html>
