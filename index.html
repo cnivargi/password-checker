@@ -3,11 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Strength Checker & Generator - Never Get Locked Out of Government Portals Again</title>
-    <meta name="description" content="Check password strength, generate compliant passwords, check for data breaches, and test across 10+ Indian government portals. Free tool for UIDAI, GSTN, Income Tax, EPFO & more.">
-    <meta name="keywords" content="password strength checker, password generator, password leak check, UIDAI password, GSTN password, government portal password">
-    <!-- Favicon -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
+    <title>ToolsForIndia - Free Tools and Calculators for Indian Users | SIP, PPF, Tax, EMI & More</title>
+    <meta name="description" content="Free financial calculators for Indians: SIP calculator, PPF calculator, Income Tax calculator, EMI calculator, GST calculator & security tools. Built by Indians for Indians. 100% privacy safe.">
+    <meta name="keywords" content="SIP calculator India, PPF calculator, income tax calculator 2025, EMI calculator, GST calculator, password checker, aadhaar masker, Indian calculators">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇳</text></svg>">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L252R36E5H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L252R36E5H', {
+    'page_title': document.title,
+    'page_path': window.location.pathname
+  });
+  
+  // Track calculator usage
+  function trackCalculation(calculatorName) {
+    gtag('event', 'calculate', {
+      'calculator_type': calculatorName
+    });
+  }
+</script>    
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L252R36E5H"></script>
     <script>
@@ -18,1054 +36,467 @@
     </script>
     
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5990484346151578"
-         crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5990484346151578" crossorigin="anonymous"></script>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .strength-bar { transition: all 0.3s ease; }
-        .tab-button { transition: all 0.3s ease; }
-        .tab-button.active {
-            border-bottom: 3px solid #4F46E5;
-            color: #4F46E5;
-            font-weight: 600;
-        }
-        .portal-badge {
+        .tool-card {
             transition: all 0.3s ease;
-            cursor: help;
         }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
-        .spinner {
-            animation: spin 1s linear infinite;
+        .live-badge {
+            animation: pulse 2s infinite;
         }
-
-        /* === Crack-time feature styles === */
         @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.9; transform: scale(1.02); }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
-        .pulse-animation { animation: pulse 2s infinite; }
-        .crack-time-display {
-            transition: all 0.4s ease;
-            min-height: 120px;
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .india-flag {
+            background: linear-gradient(to bottom, #ff9933 33.33%, white 33.33%, white 66.67%, #138808 66.67%);
+            display: inline-block;
+            width: 40px;
+            height: 30px;
+            border-radius: 4px;
+            position: relative;
+        }
+        .india-flag::after {
+            content: '⚙️';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
         }
     </style>
-<style>
-/* EmailOctopus Form Styling */
-#email-capture-form .eo-form {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-#email-capture-form .eo-form input[type="email"] {
-    width: 100%;
-    padding: 14px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    color: #1f2937;
-}
-
-#email-capture-form .eo-form button[type="submit"] {
-    width: 100%;
-    padding: 14px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    background: white;
-    color: #4F46E5;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-#email-capture-form .eo-form button[type="submit"]:hover {
-    background: #f3f4f6;
-    transform: translateY(-2px);
-}
-
-@media (min-width: 768px) {
-    #email-capture-form .eo-form {
-        display: flex;
-        gap: 12px;
-    }
-    
-    #email-capture-form .eo-form input[type="email"] {
-        flex: 1;
-        margin-bottom: 0;
-    }
-    
-    #email-capture-form .eo-form button[type="submit"] {
-        width: auto;
-        padding: 14px 32px;
-    }
-}
-</style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
-    <div class="container mx-auto px-4 py-8 max-w-5xl">
-        <!-- Header -->
-        <header class="mb-8">
-            <div class="flex justify-between items-center mb-4">
-                <h1 class="text-3xl md:text-4xl font-bold text-gray-800">🔐 PasswordChecker.in</h1>
-                <div class="text-sm">
-                    <a href="/about.html" class="text-gray-600 hover:text-indigo-600 underline mx-2">About</a>
-                    <a href="/privacy.html" class="text-gray-600 hover:text-indigo-600 underline mx-2">Privacy</a>
+<body class="bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 max-w-7xl">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="india-flag"></div>
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-bold text-gray-800">ToolsForIndia</h1>
+                        <p class="text-xs text-gray-500 hidden md:block">Built by Indians, for Indians</p>
+                    </div>
                 </div>
+                <nav class="flex space-x-4 md:space-x-6 text-sm">
+                    <a href="/" class="text-gray-700 hover:text-indigo-600 font-semibold">Home</a>
+                    <a href="#tools" class="text-gray-700 hover:text-indigo-600">Tools</a>
+                    <a href="#blog" class="text-gray-700 hover:text-indigo-600">Blog</a>
+                    <a href="#feedback" class="text-gray-700 hover:text-indigo-600">Feedback</a>
+                </nav>
             </div>
-            <p class="text-xl text-center text-gray-700 font-semibold mb-2">
-                Never Get Locked Out of Government Portals Again
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 max-w-7xl">
+        
+        <!-- Hero Section -->
+        <section class="text-center mb-12 md:mb-16">
+            <div class="inline-flex items-center justify-center space-x-2 mb-4">
+                <span class="text-5xl">🇮🇳</span>
+                <span class="text-2xl md:text-3xl font-bold text-gray-800">Free Tools for India</span>
+            </div>
+            <h2 class="text-2xl md:text-4xl font-bold text-gray-700 mb-4">
+                Free Tools and Calculators for Indian Users<br/>
+                <span class="text-indigo-600">Built by Indians for Indians</span>
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 mb-6 max-w-3xl mx-auto">
+                SIP, PPF, Income Tax, EMI calculators & security tools.<br/>
+                And many more coming... 100% privacy safe, no login required.
             </p>
-            <p class="text-center text-gray-600 mb-4">
-                Check strength • Generate passwords • Detect leaks • Test across 10+ portals
-            </p>
-            <div class="text-center">
-                <div class="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">
-                    ✓ 100% Privacy Safe - Nothing leaves your browser
+            <div class="flex flex-wrap justify-center gap-3 text-sm">
+                <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-semibold">✅ No Registration</span>
+                <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-semibold">🔒 100% Privacy Safe</span>
+                <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-semibold">🇮🇳 Made in India</span>
+                <span class="bg-orange-100 text-orange-800 px-4 py-2 rounded-full font-semibold">💰 Free Forever</span>
+            </div>
+        </section>
+
+        <!-- Quick Stats -->
+        <section class="bg-white rounded-2xl shadow-lg p-6 mb-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div>
+                    <div class="text-2xl md:text-3xl font-bold text-indigo-600">10,000+</div>
+                    <div class="text-xs md:text-sm text-gray-600">Monthly Users</div>
+                </div>
+                <div>
+                    <div class="text-2xl md:text-3xl font-bold text-green-600">6</div>
+                    <div class="text-xs md:text-sm text-gray-600">Live Tools</div>
+                </div>
+                <div>
+                    <div class="text-2xl md:text-3xl font-bold text-purple-600">100%</div>
+                    <div class="text-xs md:text-sm text-gray-600">Privacy Safe</div>
+                </div>
+                <div>
+                    <div class="text-2xl md:text-3xl font-bold text-orange-600">FREE</div>
+                    <div class="text-xs md:text-sm text-gray-600">Forever</div>
                 </div>
             </div>
-        </header>
+        </section>
 
-        <!-- Tabs -->
-        <div class="bg-white rounded-t-2xl shadow-lg">
-            <div class="flex flex-wrap border-b border-gray-200">
-                <button id="checkTab" class="tab-button active flex-1 min-w-[120px] py-4 px-2 text-center text-sm md:text-base text-gray-700">
-                    🔍 Check
-                </button>
-                <button id="generateTab" class="tab-button flex-1 min-w-[120px] py-4 px-2 text-center text-sm md:text-base text-gray-700">
-                    ⚡ Generate
-                </button>
-                <button id="leakTab" class="tab-button flex-1 min-w-[120px] py-4 px-2 text-center text-sm md:text-base text-gray-700">
-                    🚨 Leak Check
-                </button>
-                <button id="benchmarkTab" class="tab-button flex-1 min-w-[120px] py-4 px-2 text-center text-sm md:text-base text-gray-700">
-                    📊 Portal Test
-                </button>
-            </div>
-        </div>
-
-        <!-- Check Password Panel -->
-        <div id="checkPanel" class="bg-white rounded-b-2xl shadow-2xl p-6 md:p-8 mb-8">
-            <div class="mb-6">
-                <label class="block text-gray-700 font-semibold mb-2 text-lg">Enter Your Password</label>
-                <div class="relative">
-                    <input type="password" id="passwordInput" 
-                        class="w-full px-4 py-4 text-lg border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
-                        placeholder="Type your password here...">
-                    <button id="togglePassword" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl">
-                        <span id="eyeIcon">👁️</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- === New: Time to Crack Display (inserted after password input block) === -->
-            <div id="crackTimeContainer" class="crack-time-display mb-6 rounded-xl p-6 text-center hidden">
-                <div class="text-sm font-semibold opacity-75 mb-2">⏱️ TIME TO CRACK YOUR PASSWORD</div>
-                <div id="crackTimeValue" class="text-4xl md:text-5xl font-bold mb-3">0 seconds</div>
-                <div id="crackTimeAdvice" class="text-sm opacity-90"></div>
-                <button id="shareBtn" class="mt-4 bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-semibold py-2 px-6 rounded-lg transition hidden">
-                    📤 Share Result
-                </button>
-            </div>
-
-            <div class="mb-6">
-                <div class="flex justify-between items-center mb-2">
-                    <span class="text-gray-700 font-semibold">Strength:</span>
-                    <span id="strengthText" class="font-bold text-lg">-</span>
-                </div>
-                <div class="h-4 bg-gray-200 rounded-full overflow-hidden">
-                    <div id="strengthBar" class="strength-bar h-full w-0 rounded-full"></div>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-4 mb-6">
-                <div class="space-y-2">
-                    <h3 class="font-bold text-gray-700 mb-3">✓ Basic Requirements</h3>
-                    <div id="req-length" class="flex items-center text-sm text-gray-500">
-                        <span class="mr-2">⭕</span> 8+ characters
-                    </div>
-                    <div id="req-uppercase" class="flex items-center text-sm text-gray-500">
-                        <span class="mr-2">⭕</span> Uppercase (A-Z)
-                    </div>
-                    <div id="req-lowercase" class="flex items-center text-sm text-gray-500">
-                        <span class="mr-2">⭕</span> Lowercase (a-z)
-                    </div>
-                    <div id="req-number" class="flex items-center text-sm text-gray-500">
-                        <span class="mr-2">⭕</span> Number (0-9)
-                    </div>
-                    <div id="req-special" class="flex items-center text-sm text-gray-500">
-                        <span class="mr-2">⭕</span> Special (!@#$%)
-                    </div>
-                </div>
-                <div class="space-y-2">
-                    <h3 class="font-bold text-gray-700 mb-3">🇮🇳 Portal Standards</h3>
-                    <div id="req-uidai" class="flex items-center text-sm text-gray-500">
-                        <span class="mr-2">⭕</span> UIDAI (8+ chars)
-                    </div>
-                    <div id="req-gstn" class="flex items-center text-sm text-gray-500">
-                        <span class="mr-2">⭕</span> GSTN (10+ chars)
-                    </div>
-                    <div id="req-income-tax" class="flex items-center text-sm text-gray-500">
-                        <span class="mr-2">⭕</span> Income Tax (12+)
-                    </div>
-                    <div id="req-common" class="flex items-center text-sm text-gray-500">
-                        <span class="mr-2">⭕</span> Not common
-                    </div>
-                </div>
-            </div>
-
-            <div id="scoreDisplay" class="mt-6 text-center hidden">
-                <div class="inline-block bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-8 py-4 rounded-xl">
-                    <div class="text-sm font-semibold mb-1">Security Score</div>
-                    <div class="text-4xl font-bold" id="scoreNumber">0</div>
-                    <div class="text-xs opacity-90">out of 100</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Generate Password Panel -->
-        <div id="generatePanel" class="bg-white rounded-b-2xl shadow-2xl p-6 md:p-8 mb-8 hidden">
-            <div class="mb-6">
-                <label class="block text-gray-700 font-semibold mb-2 text-lg">Select Portal</label>
-                <select id="portalSelect" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none text-lg">
-                    <option value="general">General Purpose (8+)</option>
-                    <option value="uidai">UIDAI / Aadhaar (8+)</option>
-                    <option value="gstn">GSTN / GST (10+)</option>
-                    <option value="income-tax">Income Tax (12+)</option>
-                    <option value="epfo">EPFO / UAN (8-25)</option>
-                    <option value="irctc">IRCTC (8-16)</option>
-                    <option value="passport">Passport (8-14)</option>
-                </select>
-            </div>
-
-            <div class="text-center mb-6">
-                <button id="generateBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition transform hover:scale-105">
-                    ⚡ Generate Password
-                </button>
-            </div>
-
-            <div id="generatedPasswordContainer" class="hidden">
-                <div class="bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-300 rounded-xl p-6 mb-6">
-                    <label class="block text-gray-700 font-semibold mb-2">Generated Password:</label>
-                    <div class="flex items-center gap-2 flex-wrap">
-                        <input type="text" id="generatedPassword" readonly 
-                            class="flex-1 min-w-[200px] px-4 py-3 text-xl font-mono bg-white border-2 border-gray-300 rounded-lg">
-                        <button id="copyBtn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg">
-                            📋 Copy
-                        </button>
-                        <button id="regenerateBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg">
-                            🔄 New
-                        </button>
-                    </div>
-                    <div id="copySuccess" class="mt-2 text-green-700 font-semibold hidden">✓ Copied to clipboard!</div>
-                </div>
-
-                <div class="bg-gray-50 rounded-lg p-4">
-                    <h4 class="font-bold text-gray-700 mb-3">Password Analysis:</h4>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <div id="gen-req-length" class="flex items-center text-sm text-gray-500">
-                            <span class="mr-2">⭕</span> Length OK
-                        </div>
-                        <div id="gen-req-uppercase" class="flex items-center text-sm text-gray-500">
-                            <span class="mr-2">⭕</span> Uppercase
-                        </div>
-                        <div id="gen-req-lowercase" class="flex items-center text-sm text-gray-500">
-                            <span class="mr-2">⭕</span> Lowercase
-                        </div>
-                        <div id="gen-req-number" class="flex items-center text-sm text-gray-500">
-                            <span class="mr-2">⭕</span> Numbers
-                        </div>
-                        <div id="gen-req-special" class="flex items-center text-sm text-gray-500">
-                            <span class="mr-2">⭕</span> Special
-                        </div>
-                        <div id="gen-req-portal" class="flex items-center text-sm text-gray-500">
-                            <span class="mr-2">⭕</span> Portal OK
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Leak Check Panel -->
-        <div id="leakPanel" class="bg-white rounded-b-2xl shadow-2xl p-6 md:p-8 mb-8 hidden">
-            <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
-                <p class="text-yellow-900 text-sm">
-                    <strong>🔒 Privacy Notice:</strong> This uses k-Anonymity. Only the first 5 characters of your password's hash are sent to check against breach databases. Your actual password never leaves your browser.
-                </p>
-            </div>
-
-            <div class="mb-6">
-                <label class="block text-gray-700 font-semibold mb-2 text-lg">Enter Password to Check for Leaks</label>
-                <div class="relative">
-                    <input type="password" id="leakPasswordInput" 
-                        class="w-full px-4 py-4 text-lg border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
-                        placeholder="Type password to check...">
-                    <button id="toggleLeakPassword" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl">
-                        <span id="leakEyeIcon">👁️</span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="text-center mb-6">
-                <button id="checkLeakBtn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition transform hover:scale-105">
-                    🚨 Check for Data Breaches
-                </button>
-            </div>
-
-            <div id="leakResult" class="hidden"></div>
-            <div id="leakLoading" class="hidden text-center py-8">
-                <div class="inline-block spinner text-4xl">⏳</div>
-                <p class="text-gray-600 mt-2">Checking breach databases...</p>
-            </div>
-        </div>
-
-        <!-- Multi-Portal Benchmark Panel -->
-        <div id="benchmarkPanel" class="bg-white rounded-b-2xl shadow-2xl p-6 md:p-8 mb-8 hidden">
-            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-                <p class="text-blue-900 text-sm">
-                    <strong>📊 Portal Compatibility Test:</strong> Check if your password works across multiple Indian government portals at once.
-                </p>
-            </div>
-
-            <div class="mb-6">
-                <label class="block text-gray-700 font-semibold mb-2 text-lg">Enter Password to Test</label>
-                <div class="relative">
-                    <input type="password" id="benchmarkPasswordInput" 
-                        class="w-full px-4 py-4 text-lg border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
-                        placeholder="Type password to test...">
-                    <button id="toggleBenchmarkPassword" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl">
-                        <span id="benchmarkEyeIcon">👁️</span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="text-center mb-6">
-                <button id="benchmarkBtn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition transform hover:scale-105">
-                    📊 Test Across All Portals
-                </button>
-            </div>
-
-            <div id="benchmarkResult" class="hidden">
-                <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Portal Compatibility Results</h3>
-                <div class="grid md:grid-cols-2 gap-4" id="portalResults"></div>
+        <!-- Tools Grid -->
+        <section id="tools" class="mb-16">
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center">Our Tools</h3>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                 
-                <div id="benchmarkSummary" class="mt-6 p-4 bg-gray-50 rounded-lg text-center">
-                    <p class="text-lg font-semibold text-gray-800">
-                        Works on <span id="compatibleCount" class="text-green-600">0</span> out of <span id="totalCount">10</span> portals
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Government Compliance Info -->
-        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">🏛️ Government Portal Password Policies</h2>
-            <div class="grid md:grid-cols-3 gap-4">
-                <div class="border-l-4 border-yellow-500 pl-4">
-                    <h3 class="font-bold text-gray-700 mb-2">UIDAI (Aadhaar)</h3>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                        <li>• Min 8 characters</li>
-                        <li>• 1 uppercase, 1 lowercase</li>
-                        <li>• 1 number, 1 special char</li>
-                        <li>• No spaces allowed</li>
-                    </ul>
-                </div>
-                <div class="border-l-4 border-green-500 pl-4">
-                    <h3 class="font-bold text-gray-700 mb-2">GSTN Portal</h3>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                        <li>• Min 10 characters</li>
-                        <li>• Mixed case required</li>
-                        <li>• Numbers mandatory</li>
-                        <li>• Special chars recommended</li>
-                    </ul>
-                </div>
-                <div class="border-l-4 border-blue-500 pl-4">
-                    <h3 class="font-bold text-gray-700 mb-2">Income Tax Portal</h3>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                        <li>• Min 12 characters</li>
-                        <li>• High complexity required</li>
-                        <li>• Regular updates needed</li>
-                        <li>• No dictionary words</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Blog Section -->
-        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">📚 Learn More About Password Security</h2>
-            <div class="grid md:grid-cols-3 gap-4">
-                <a href="/uidai-password-requirements.html" class="block p-4 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-md transition">
-                    <h3 class="font-bold text-gray-700 mb-2">🏛️ UIDAI Password Guide</h3>
-                    <p class="text-sm text-gray-600">Complete requirements for Aadhaar portal passwords</p>
-                </a>
-                <a href="/gstn-password-policy.html" class="block p-4 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-md transition">
-                    <h3 class="font-bold text-gray-700 mb-2">💼 GSTN Portal Policy</h3>
-                    <p class="text-sm text-gray-600">How to create GST portal compliant passwords</p>
-                </a>
-                <a href="/strong-password-tips.html" class="block p-4 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-md transition">
-                    <h3 class="font-bold text-gray-700 mb-2">💡 Strong Password Tips</h3>
-                    <p class="text-sm text-gray-600">10 tips for government-compliant passwords</p>
-<a href="/password-leak-check-guide.html" class="block p-4 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-md transition">
-    <h3 class="font-bold text-gray-700 mb-2">🚨 Password Leak Check Guide</h3>
-    <p class="text-sm text-gray-600">How to check if your password was leaked in data breaches</p>
-</a>
-<a href="/portal-password-compatibility.html" class="block p-4 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-md transition">
-    <h3 class="font-bold text-gray-700 mb-2">📊 Portal Compatibility Guide</h3>
-    <p class="text-sm text-gray-600">Why your password works on some portals but not others</p>
-</a>
-                </a>
-            </div>
-        </div>
-
-<!-- Blog Section - Add this before footer -->
-<div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-    <h2 class="text-2xl font-bold text-gray-800 mb-4">📚 Learn More</h2>
-    <div class="grid md:grid-cols-3 gap-4">
-        <a href="/uidai-password-requirements.html" class="block p-4 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-md transition">
-            <h3 class="font-bold text-gray-700 mb-2">UIDAI Password Guide</h3>
-            <p class="text-sm text-gray-600">Complete requirements for Aadhaar portal passwords</p>
-        </a>
-        <a href="/gstn-password-policy.html" class="block p-4 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-md transition">
-            <h3 class="font-bold text-gray-700 mb-2">GSTN Portal Policy</h3>
-            <p class="text-sm text-gray-600">How to create GST portal compliant passwords</p>
-        </a>
-        <a href="/strong-password-tips.html" class="block p-4 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-md transition">
-            <h3 class="font-bold text-gray-700 mb-2">Strong Password Tips</h3>
-            <p class="text-sm text-gray-600">10 tips for government-compliant passwords</p>
-        </a>
-    </div>
-</div>
-<!-- Email Capture Section -->
-<div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl shadow-2xl p-8 mb-8 text-white">
-    <div class="text-center max-w-2xl mx-auto">
-        <h2 class="text-3xl font-bold mb-3">📬 Stay Protected</h2>
-        <p class="text-lg mb-6 opacity-90">
-            Get instant alerts about data breaches, password security tips, and government portal updates
-        </p>
-        
-        <!-- EmailOctopus Form -->
-        <div id="email-capture-form">
-            <script async src="https://eomail5.com/form/b1c7edde-b94f-11f0-a6f5-556e730c5168.js" data-form="b1c7edde-b94f-11f0-a6f5-556e730c5168"></script>
-        </div>
-        
-        <p class="text-xs mt-4 opacity-75">
-            🔒 100% Privacy Safe • No Spam • Unsubscribe Anytime
-        </p>
-    </div>
-</div>
-        <!-- Footer -->
-        <footer class="text-center text-gray-600 text-sm">
-    		<p class="mb-2">
-        		<a href="/about.html" class="hover:text-indigo-600 underline">About</a> | 
-        		<a href="/privacy.html" class="hover:text-indigo-600 underline">Privacy Policy</a> | 
-        		<a href="/uidai-password-requirements.html" class="hover:text-indigo-600 underline">Blog</a>
-    		</p>
-    		<p class="mb-2">Made with ❤️ for Indian users | 100% Free | No Registration Required</p>
-    		<p class="text-xs text-gray-500">This tool is for educational purposes. Always follow official guidelines from respective government portals.</p>
-	</footer>
- </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script>
-        // Tab switching
-        const tabs = {
-            check: { button: document.getElementById('checkTab'), panel: document.getElementById('checkPanel') },
-            generate: { button: document.getElementById('generateTab'), panel: document.getElementById('generatePanel') },
-            leak: { button: document.getElementById('leakTab'), panel: document.getElementById('leakPanel') },
-            benchmark: { button: document.getElementById('benchmarkTab'), panel: document.getElementById('benchmarkPanel') }
-        };
-
-        function switchTab(activeTab) {
-            Object.keys(tabs).forEach(key => {
-                tabs[key].button.classList.remove('active');
-                tabs[key].panel.classList.add('hidden');
-            });
-            tabs[activeTab].button.classList.add('active');
-            tabs[activeTab].panel.classList.remove('hidden');
-        }
-
-        tabs.check.button.addEventListener('click', () => switchTab('check'));
-        tabs.generate.button.addEventListener('click', () => switchTab('generate'));
-        tabs.leak.button.addEventListener('click', () => switchTab('leak'));
-        tabs.benchmark.button.addEventListener('click', () => switchTab('benchmark'));
-
-        // Password checker
-        const passwordInput = document.getElementById('passwordInput');
-        const togglePassword = document.getElementById('togglePassword');
-        const strengthBar = document.getElementById('strengthBar');
-        const strengthText = document.getElementById('strengthText');
-        const scoreDisplay = document.getElementById('scoreDisplay');
-        const scoreNumber = document.getElementById('scoreNumber');
-
-        const commonPasswords = ['password', '123456', '12345678', 'qwerty', 'abc123', 'password123', 'india123', 'welcome', 'admin'];
-
-        // === Crack-time elements ===
-        const crackTimeContainer = document.getElementById('crackTimeContainer');
-        const crackTimeValue = document.getElementById('crackTimeValue');
-        const crackTimeAdvice = document.getElementById('crackTimeAdvice');
-        const shareBtn = document.getElementById('shareBtn');
-
-        togglePassword.addEventListener('click', () => {
-            passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
-            document.getElementById('eyeIcon').textContent = passwordInput.type === 'password' ? '👁️' : '🙈';
-        });
-
-        passwordInput.addEventListener('input', (e) => {
-            const password = e.target.value;
-            if (password.length === 0) {
-                resetUI();
-                return;
-            }
-
-            const checks = {
-                length: password.length >= 8,
-                uppercase: /[A-Z]/.test(password),
-                lowercase: /[a-z]/.test(password),
-                number: /[0-9]/.test(password),
-                special: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password),
-                uidai: password.length >= 8,
-                gstn: password.length >= 10,
-                incomeTax: password.length >= 12,
-                notCommon: !commonPasswords.includes(password.toLowerCase())
-            };
-
-            updateCheck('req-length', checks.length);
-            updateCheck('req-uppercase', checks.uppercase);
-            updateCheck('req-lowercase', checks.lowercase);
-            updateCheck('req-number', checks.number);
-            updateCheck('req-special', checks.special);
-            updateCheck('req-uidai', checks.uidai);
-            updateCheck('req-gstn', checks.gstn);
-            updateCheck('req-income-tax', checks.incomeTax);
-            updateCheck('req-common', checks.notCommon);
-
-            const strength = calculateStrength(password, checks);
-            updateStrengthBar(strength);
-
-            // === Inserted lines for crack-time ===
-            const crackTime = estimateCrackTime(password);
-            updateCrackTimeDisplay(crackTime);
-
-            scoreDisplay.classList.remove('hidden');
-            scoreNumber.textContent = strength.score;
-        });
-
-        function updateCheck(id, passed) {
-            const element = document.getElementById(id);
-            if (passed) {
-                element.classList.remove('text-gray-500');
-                element.classList.add('text-green-600', 'font-semibold');
-                element.querySelector('span').textContent = '✅';
-            } else {
-                element.classList.remove('text-green-600', 'font-semibold');
-                element.classList.add('text-gray-500');
-                element.querySelector('span').textContent = '⭕';
-            }
-        }
-
-        function calculateStrength(password, checks) {
-            let score = 0;
-            if (password.length >= 8) score += 20;
-            if (password.length >= 12) score += 15;
-            if (checks.uppercase) score += 15;
-            if (checks.lowercase) score += 15;
-            if (checks.number) score += 10;
-            if (checks.special) score += 15;
-            if (checks.notCommon) score += 10;
-            else score -= 20;
-
-            score = Math.min(100, Math.max(0, score));
-
-            let level, color, width;
-            if (score >= 80) {
-                level = 'Very Strong 💪';
-                color = 'bg-green-500';
-                width = '100%';
-            } else if (score >= 60) {
-                level = 'Strong ✓';
-                color = 'bg-blue-500';
-                width = '75%';
-            } else if (score >= 40) {
-                level = 'Moderate ⚠️';
-                color = 'bg-yellow-500';
-                width = '50%';
-            } else {
-                level = 'Weak ❌';
-                color = 'bg-red-500';
-                width = '25%';
-            }
-
-            return { score, level, color, width };
-        }
-
-        function updateStrengthBar(strength) {
-            strengthBar.style.width = strength.width;
-            strengthBar.className = `strength-bar h-full rounded-full ${strength.color}`;
-            strengthText.textContent = strength.level;
-        }
-
-        function resetUI() {
-            strengthBar.style.width = '0%';
-            strengthText.textContent = '-';
-            scoreDisplay.classList.add('hidden');
-            // Hide crack-time container
-            if (crackTimeContainer) crackTimeContainer.classList.add('hidden');
-            document.querySelectorAll('[id^="req-"]').forEach(el => {
-                el.classList.remove('text-green-600', 'font-semibold');
-                el.classList.add('text-gray-500');
-                el.querySelector('span').textContent = '⭕';
-            });
-        }
-
-        // === Password generator
-        const portalSelect = document.getElementById('portalSelect');
-        const generateBtn = document.getElementById('generateBtn');
-        const regenerateBtn = document.getElementById('regenerateBtn');
-        const copyBtn = document.getElementById('copyBtn');
-        const generatedPassword = document.getElementById('generatedPassword');
-        const generatedPasswordContainer = document.getElementById('generatedPasswordContainer');
-        const copySuccess = document.getElementById('copySuccess');
-
-        const adjectives = ['Quick', 'Brave', 'Smart', 'Cool', 'Fast', 'Bold', 'Wise', 'Pure', 'Bright', 'Swift', 'Calm', 'Warm'];
-        const nouns = ['Tiger', 'Eagle', 'Lion', 'Wolf', 'Hawk', 'Bear', 'Fox', 'Owl', 'Shark', 'Falcon', 'Panda', 'Cobra'];
-        const specials = ['@', '#', '$', '%', '&', '*', '!'];
-
-        function generatePassword(portal) {
-            const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
-            const noun = nouns[Math.floor(Math.random() * nouns.length)];
-            const num1 = Math.floor(Math.random() * 10);
-            const special = specials[Math.floor(Math.random() * specials.length)];
-            const num2 = Math.floor(Math.random() * 100);
-
-            let password = `${adj}${num1}${noun}${special}${num2}`;
-
-            if (portal === 'gstn' && password.length < 10) {
-                password += Math.floor(Math.random() * 10);
-            }
-            if (portal === 'income-tax' && password.length < 12) {
-                password += Math.floor(Math.random() * 100);
-            }
-
-            return password;
-        }
-
-        function analyzeGeneratedPassword(password, portal) {
-            const checks = {
-                length: password.length >= 8,
-                uppercase: /[A-Z]/.test(password),
-                lowercase: /[a-z]/.test(password),
-                number: /[0-9]/.test(password),
-                special: /[!@#$%^&*]/.test(password)
-            };
-
-            let portalCompliant = false;
-            if (portal === 'uidai' && password.length >= 8) portalCompliant = true;
-            if (portal === 'gstn' && password.length >= 10) portalCompliant = true;
-            if (portal === 'income-tax' && password.length >= 12) portalCompliant = true;
-            if (portal === 'general' && password.length >= 8) portalCompliant = true;
-            if (portal === 'epfo' && password.length >= 8 && password.length <= 25) portalCompliant = true;
-            if (portal === 'irctc' && password.length >= 8 && password.length <= 16) portalCompliant = true;
-            if (portal === 'passport' && password.length >= 8 && password.length <= 14) portalCompliant = true;
-
-            updateGenCheck('gen-req-length', checks.length);
-            updateGenCheck('gen-req-uppercase', checks.uppercase);
-            updateGenCheck('gen-req-lowercase', checks.lowercase);
-            updateGenCheck('gen-req-number', checks.number);
-            updateGenCheck('gen-req-special', checks.special);
-            updateGenCheck('gen-req-portal', portalCompliant);
-        }
-
-        function updateGenCheck(id, passed) {
-            const element = document.getElementById(id);
-            if (passed) {
-                element.classList.remove('text-gray-500');
-                element.classList.add('text-green-600', 'font-semibold');
-                element.querySelector('span').textContent = '✅';
-            } else {
-                element.classList.remove('text-green-600', 'font-semibold');
-                element.classList.add('text-gray-500');
-                element.querySelector('span').textContent = '⭕';
-            }
-        }
-
-        generateBtn.addEventListener('click', () => {
-            const portal = portalSelect.value;
-            const password = generatePassword(portal);
-            generatedPassword.value = password;
-            generatedPasswordContainer.classList.remove('hidden');
-            analyzeGeneratedPassword(password, portal);
-            copySuccess.classList.add('hidden');
-        });
-
-        regenerateBtn.addEventListener('click', () => {
-            const portal = portalSelect.value;
-            const password = generatePassword(portal);
-            generatedPassword.value = password;
-            analyzeGeneratedPassword(password, portal);
-            copySuccess.classList.add('hidden');
-        });
-
-        copyBtn.addEventListener('click', () => {
-            generatedPassword.select();
-            document.execCommand('copy');
-            copySuccess.classList.remove('hidden');
-            setTimeout(() => copySuccess.classList.add('hidden'), 3000);
-        });
-
-        // === Leak check
-        const leakPasswordInput = document.getElementById('leakPasswordInput');
-        const toggleLeakPassword = document.getElementById('toggleLeakPassword');
-        const checkLeakBtn = document.getElementById('checkLeakBtn');
-        const leakResult = document.getElementById('leakResult');
-        const leakLoading = document.getElementById('leakLoading');
-
-        toggleLeakPassword.addEventListener('click', () => {
-            leakPasswordInput.type = leakPasswordInput.type === 'password' ? 'text' : 'password';
-            document.getElementById('leakEyeIcon').textContent = leakPasswordInput.type === 'password' ? '👁️' : '🙈';
-        });
-
-        checkLeakBtn.addEventListener('click', async () => {
-            const password = leakPasswordInput.value;
-            if (!password) {
-                alert('Please enter a password to check');
-                return;
-            }
-
-            leakResult.classList.add('hidden');
-            leakLoading.classList.remove('hidden');
-
-            try {
-                const hash = CryptoJS.SHA1(password).toString().toUpperCase();
-                const prefix = hash.substring(0, 5);
-                const suffix = hash.substring(5);
-
-                const response = await fetch(`https://api.pwnedpasswords.com/range/${prefix}`);
-                const data = await response.text();
-
-                const found = data.split('\n').find(line => line.startsWith(suffix));
-
-                leakLoading.classList.add('hidden');
-                leakResult.classList.remove('hidden');
-
-                if (found) {
-                    const count = found.split(':')[1].trim();
-                    leakResult.innerHTML = `
-                        <div class="bg-red-50 border-2 border-red-500 rounded-xl p-6">
-                            <div class="text-center mb-4">
-                                <span class="text-6xl">⚠️</span>
-                            </div>
-                            <h3 class="text-2xl font-bold text-red-800 mb-3 text-center">Password Found in Data Breaches!</h3>
-                            <p class="text-red-700 mb-4 text-center">
-                                This password has appeared in <strong class="text-3xl">${parseInt(count).toLocaleString()}</strong> data breaches.
-                            </p>
-                            <div class="bg-white p-4 rounded-lg">
-                                <p class="text-gray-800 text-sm mb-2"><strong>⚠️ What this means:</strong></p>
-                                <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
-                                    <li>This password is publicly known to hackers</li>
-                                    <li>It's likely in password cracking dictionaries</li>
-                                    <li>Anyone using this password is at high risk</li>
-                                </ul>
-                            </div>
-                            <div class="mt-4 text-center">
-                                <button onclick="switchTab('generate')" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg">
-                                    Generate Safe Password →
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    leakResult.innerHTML = `
-                        <div class="bg-green-50 border-2 border-green-500 rounded-xl p-6">
-                            <div class="text-center mb-4">
-                                <span class="text-6xl">✅</span>
-                            </div>
-                            <h3 class="text-2xl font-bold text-green-800 mb-3 text-center">Good News!</h3>
-                            <p class="text-green-700 mb-4 text-center">
-                                This password was <strong>not found</strong> in any known data breaches.
-                            </p>
-                            <div class="bg-white p-4 rounded-lg">
-                                <p class="text-gray-800 text-sm mb-2"><strong>✓ What this means:</strong></p>
-                                <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
-                                    <li>This password hasn't been compromised in major breaches</li>
-                                    <li>It's not in common hacker databases</li>
-                                    <li>Still, use unique passwords for each account</li>
-                                </ul>
-                            </div>
-                            <div class="mt-4 text-center">
-                                <p class="text-sm text-gray-600">💡 Pro tip: Check this password regularly and change it if it ever appears in breaches.</p>
-                            </div>
-                        </div>
-                    `;
-                }
-            } catch (error) {
-                leakLoading.classList.add('hidden');
-                leakResult.classList.remove('hidden');
-                leakResult.innerHTML = `
-                    <div class="bg-yellow-50 border-2 border-yellow-500 rounded-xl p-6">
-                        <h3 class="text-xl font-bold text-yellow-800 mb-2 text-center">Unable to Check</h3>
-                        <p class="text-yellow-700 text-center">
-                            There was an error connecting to the breach database. Please try again.
-                        </p>
+                <!-- SIP Calculator -->
+                <a href="/sip-calculator.html" class="tool-card block bg-white rounded-xl shadow-lg p-6 border-2 border-transparent hover:border-indigo-500">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="text-4xl">💰</div>
+                        <span class="text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-semibold live-badge">LIVE</span>
                     </div>
-                `;
-            }
-        });
-
-        // === Multi-portal benchmark
-        const benchmarkPasswordInput = document.getElementById('benchmarkPasswordInput');
-        const toggleBenchmarkPassword = document.getElementById('toggleBenchmarkPassword');
-        const benchmarkBtn = document.getElementById('benchmarkBtn');
-        const benchmarkResult = document.getElementById('benchmarkResult');
-        const portalResults = document.getElementById('portalResults');
-
-        toggleBenchmarkPassword.addEventListener('click', () => {
-            benchmarkPasswordInput.type = benchmarkPasswordInput.type === 'password' ? 'text' : 'password';
-            document.getElementById('benchmarkEyeIcon').textContent = benchmarkPasswordInput.type === 'password' ? '👁️' : '🙈';
-        });
-
-        const portals = [
-            { name: 'UIDAI (Aadhaar)', minLen: 8, maxLen: null, desc: '8+ chars, mixed case, number, special' },
-            { name: 'GSTN (GST Portal)', minLen: 10, maxLen: 15, desc: '10-15 chars, mixed case, number, special' },
-            { name: 'Income Tax Portal', minLen: 12, maxLen: 14, desc: '12-14 chars, high complexity' },
-            { name: 'EPFO (PF Portal)', minLen: 8, maxLen: 25, desc: '8-25 chars, mixed case, number, special' },
-            { name: 'IRCTC (Railway)', minLen: 8, maxLen: 16, desc: '8-16 chars, alphanumeric' },
-            { name: 'Passport Seva', minLen: 8, maxLen: 14, desc: '8-14 chars, mixed case, number, special' },
-            { name: 'DigiLocker', minLen: 6, maxLen: 6, desc: '6-digit PIN only' },
-            { name: 'MCA (Company Portal)', minLen: 8, maxLen: 15, desc: '8-15 chars, mixed case' },
-            { name: 'NPS (Pension)', minLen: 8, maxLen: 20, desc: '8-20 chars, mixed case, number' },
-            { name: 'Public Sector Banks', minLen: 8, maxLen: null, desc: '8+ chars, mixed case, number, special' }
-        ];
-
-        benchmarkBtn.addEventListener('click', () => {
-            const password = benchmarkPasswordInput.value;
-            if (!password) {
-                alert('Please enter a password to test');
-                return;
-            }
-
-            const checks = {
-                length: password.length,
-                hasUppercase: /[A-Z]/.test(password),
-                hasLowercase: /[a-z]/.test(password),
-                hasNumber: /[0-9]/.test(password),
-                hasSpecial: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password),
-                isNumericOnly: /^\d+$/.test(password)
-            };
-
-            let compatibleCount = 0;
-            portalResults.innerHTML = '';
-
-            portals.forEach(portal => {
-                let compatible = true;
-                let status = 'Strong';
-                let bgColor = 'bg-green-50';
-                let borderColor = 'border-green-500';
-                let textColor = 'text-green-800';
-                let icon = '✅';
-                let reasons = [];
-
-                // Length check
-                if (checks.length < portal.minLen) {
-                    compatible = false;
-                    reasons.push(`Too short (min ${portal.minLen})`);
-                }
-                if (portal.maxLen && checks.length > portal.maxLen) {
-                    compatible = false;
-                    reasons.push(`Too long (max ${portal.maxLen})`);
-                }
-
-                // Special case for DigiLocker (PIN only)
-                if (portal.name === 'DigiLocker') {
-                    if (checks.isNumericOnly && checks.length === 6) {
-                        compatible = true;
-                    } else {
-                        compatible = false;
-                        reasons.push('Must be 6-digit PIN only');
-                    }
-                } else {
-                    // Standard checks
-                    if (!checks.hasUppercase && portal.desc.includes('mixed case')) {
-                        compatible = false;
-                        reasons.push('Missing uppercase');
-                    }
-                    if (!checks.hasLowercase && portal.desc.includes('mixed case')) {
-                        compatible = false;
-                        reasons.push('Missing lowercase');
-                    }
-                    if (!checks.hasNumber && portal.desc.includes('number')) {
-                        compatible = false;
-                        reasons.push('Missing number');
-                    }
-                    if (!checks.hasSpecial && portal.desc.includes('special')) {
-                        compatible = false;
-                        reasons.push('Missing special char');
-                    }
-                }
-
-                if (!compatible) {
-                    status = 'Invalid';
-                    bgColor = 'bg-red-50';
-                    borderColor = 'border-red-500';
-                    textColor = 'text-red-800';
-                    icon = '❌';
-                } else {
-                    compatibleCount++;
-                    if (checks.length >= portal.minLen && checks.length < (portal.minLen + 2)) {
-                        status = 'Moderate';
-                        bgColor = 'bg-yellow-50';
-                        borderColor = 'border-yellow-500';
-                        textColor = 'text-yellow-800';
-                        icon = '⚠️';
-                    }
-                }
-
-                portalResults.innerHTML += `
-                    <div class="${bgColor} border-2 ${borderColor} rounded-lg p-4">
-                        <div class="flex items-start justify-between mb-2">
-                            <h4 class="font-bold ${textColor}">${portal.name}</h4>
-                            <span class="text-2xl">${icon}</span>
-                        </div>
-                        <p class="text-xs text-gray-600 mb-2">${portal.desc}</p>
-                        <div class="font-semibold ${textColor} text-sm">
-                            ${status}
-                            ${reasons.length > 0 ? '<div class="text-xs mt-1">' + reasons.join(', ') + '</div>' : ''}
-                        </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">SIP Calculator</h4>
+                    <p class="text-sm text-gray-600 mb-3">Calculate returns on systematic investment plans with step-up SIP option and detailed year-wise breakdown.</p>
+                    <div class="flex items-center text-indigo-600 font-semibold text-sm">
+                        Calculate Now <span class="ml-1">→</span>
                     </div>
-                `;
-            });
+                </a>
 
-            document.getElementById('compatibleCount').textContent = compatibleCount;
-            document.getElementById('totalCount').textContent = portals.length;
-            benchmarkResult.classList.remove('hidden');
+                <!-- PPF Calculator -->
+                <a href="/ppf-calculator.html" class="tool-card block bg-white rounded-xl shadow-lg p-6 border-2 border-transparent hover:border-indigo-500">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="text-4xl">🏦</div>
+                        <span class="text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-semibold live-badge">LIVE</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">PPF Calculator</h4>
+                    <p class="text-sm text-gray-600 mb-3">Calculate Public Provident Fund maturity with interest, tax benefits under 80C, and partial withdrawal schedule.</p>
+                    <div class="flex items-center text-indigo-600 font-semibold text-sm">
+                        Calculate Now <span class="ml-1">→</span>
+                    </div>
+                </a>
 
-            // Scroll to results
-            benchmarkResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        });
+                <!-- Income Tax Calculator -->
+                <a href="/income-tax-calculator.html" class="tool-card block bg-white rounded-xl shadow-lg p-6 border-2 border-transparent hover:border-indigo-500">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="text-4xl">📊</div>
+                        <span class="text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-semibold live-badge">LIVE</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Income Tax Calculator</h4>
+                    <p class="text-sm text-gray-600 mb-3">Compare new vs old tax regime for 2025. Includes 87A rebate, standard deduction, HRA exemption calculator.</p>
+                    <div class="flex items-center text-indigo-600 font-semibold text-sm">
+                        Calculate Now <span class="ml-1">→</span>
+                    </div>
+                </a>
 
-        // === Time-to-crack calculator and helpers ===
-        function estimateCrackTime(password) {
-            if (!password || password.length === 0) {
-                return {
-                    formatted: '0 seconds',
-                    seconds: 0,
-                    severity: 'bg-gray-200 text-gray-600',
-                    advice: '',
-                    showShare: false
-                };
+                <!-- EMI Calculator -->
+                <a href="/emi-calculator.html" class="tool-card block bg-white rounded-xl shadow-lg p-6 border-2 border-transparent hover:border-indigo-500">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="text-4xl">🏠</div>
+                        <span class="text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-semibold live-badge">LIVE</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">EMI Calculator</h4>
+                    <p class="text-sm text-gray-600 mb-3">Calculate home loan, car loan, personal loan EMI with prepayment schedule and amortization table download.</p>
+                    <div class="flex items-center text-indigo-600 font-semibold text-sm">
+                        Calculate Now <span class="ml-1">→</span>
+                    </div>
+                </a>
+
+                <!-- Aadhaar Masker -->
+                <a href="/aadhaar-masker.html" class="tool-card block bg-white rounded-xl shadow-lg p-6 border-2 border-transparent hover:border-indigo-500">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="text-4xl">🆔</div>
+                        <span class="text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-semibold live-badge">LIVE</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Aadhaar Masker</h4>
+                    <p class="text-sm text-gray-600 mb-3">Mask Aadhaar numbers safely for sharing. Shows only last 4 digits as per UIDAI guidelines. 100% client-side.</p>
+                    <div class="flex items-center text-indigo-600 font-semibold text-sm">
+                        Mask Now <span class="ml-1">→</span>
+                    </div>
+                </a>
+
+                <!-- Password Checker -->
+                <a href="https://passwordchecker.in" target="_blank" class="tool-card block bg-white rounded-xl shadow-lg p-6 border-2 border-transparent hover:border-indigo-500">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="text-4xl">🔐</div>
+                        <span class="text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-semibold live-badge">LIVE</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Password Checker</h4>
+                    <p class="text-sm text-gray-600 mb-3">Check password strength, detect data breaches, test against 10+ government portal requirements. Time to crack display.</p>
+                    <div class="flex items-center text-indigo-600 font-semibold text-sm">
+                        Check Password <span class="ml-1">→</span>
+                    </div>
+                </a>
+
+            </div>
+
+            <!-- Coming Soon Tools -->
+            <h4 class="text-xl font-bold text-gray-700 mb-4 text-center">Coming This Week</h4>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div class="bg-gray-50 rounded-lg p-4 text-center border-2 border-dashed border-gray-300">
+                    <div class="text-3xl mb-2">📈</div>
+                    <div class="text-sm font-semibold text-gray-700">NPS Calculator</div>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-4 text-center border-2 border-dashed border-gray-300">
+                    <div class="text-3xl mb-2">💼</div>
+                    <div class="text-sm font-semibold text-gray-700">GST Calculator</div>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-4 text-center border-2 border-dashed border-gray-300">
+                    <div class="text-3xl mb-2">💹</div>
+                    <div class="text-sm font-semibold text-gray-700">Capital Gains</div>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-4 text-center border-2 border-dashed border-gray-300">
+                    <div class="text-3xl mb-2">🏛️</div>
+                    <div class="text-sm font-semibold text-gray-700">IFSC Finder</div>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-4 text-center border-2 border-dashed border-gray-300">
+                    <div class="text-3xl mb-2">📱</div>
+                    <div class="text-sm font-semibold text-gray-700">UPI QR Generator</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Blog Posts - EXPANDED -->
+        <section id="blog" class="mb-16">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Latest Guides & Articles</h3>
+                <p class="text-gray-600">Learn about financial planning, tax saving, and security for Indian users</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <!-- Featured Post 1 -->
+                <a href="/blog/sip-calculator-guide.html" class="block bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl shadow-lg p-6 hover:shadow-2xl transition border-2 border-indigo-200">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs bg-indigo-600 text-white px-3 py-1 rounded-full font-semibold">FEATURED</span>
+                        <div class="text-3xl">💰</div>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Complete SIP Calculator Guide 2025</h4>
+                    <p class="text-sm text-gray-600 mb-4">How to use SIP calculator for retirement planning, wealth creation, and goal-based investing in India. Step-by-step with examples.</p>
+                    <div class="flex items-center justify-between text-xs text-gray-500">
+                        <span>12 min read</span>
+                        <span class="text-indigo-600 font-semibold">Read Full Guide →</span>
+                    </div>
+                </a>
+
+                <!-- Featured Post 2 -->
+                <a href="/blog/ppf-vs-sip.html" class="block bg-gradient-to-br from-green-50 to-blue-50 rounded-xl shadow-lg p-6 hover:shadow-2xl transition border-2 border-green-200">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs bg-green-600 text-white px-3 py-1 rounded-full font-semibold">FEATURED</span>
+                        <div class="text-3xl">🏦</div>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">PPF vs SIP: Which is Better in 2025?</h4>
+                    <p class="text-sm text-gray-600 mb-4">Detailed comparison of PPF and SIP with returns, tax benefits, liquidity, and risk analysis. With real examples and calculations.</p>
+                    <div class="flex items-center justify-between text-xs text-gray-500">
+                        <span>15 min read</span>
+                        <span class="text-green-600 font-semibold">Read Comparison →</span>
+                    </div>
+                </a>
+
+                <!-- Featured Post 3 -->
+                <a href="/blog/income-tax-new-regime.html" class="block bg-gradient-to-br from-orange-50 to-red-50 rounded-xl shadow-lg p-6 hover:shadow-2xl transition border-2 border-orange-200">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs bg-orange-600 text-white px-3 py-1 rounded-full font-semibold">FEATURED</span>
+                        <div class="text-3xl">📊</div>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">New Tax Regime 2025 Explained</h4>
+                    <p class="text-sm text-gray-600 mb-4">Complete guide to new vs old income tax regime with examples, 87A rebate, standard deduction, and which regime saves more tax.</p>
+                    <div class="flex items-center justify-between text-xs text-gray-500">
+                        <span>18 min read</span>
+                        <span class="text-orange-600 font-semibold">Read Guide →</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- More Blog Posts -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="/blog/emi-calculator-guide.html" class="block bg-white rounded-xl shadow-md p-5 hover:shadow-lg transition">
+                    <div class="text-2xl mb-2">🏠</div>
+                    <h5 class="text-lg font-bold text-gray-800 mb-2">EMI Calculator Guide</h5>
+                    <p class="text-xs text-gray-600 mb-3">How to calculate home loan EMI, car loan EMI with prepayment options.</p>
+                    <span class="text-xs text-indigo-600 font-semibold">Read More →</span>
+                </a>
+                <a href="/blog/aadhaar-security.html" class="block bg-white rounded-xl shadow-md p-5 hover:shadow-lg transition">
+                    <div class="text-2xl mb-2">🆔</div>
+                    <h5 class="text-lg font-bold text-gray-800 mb-2">Aadhaar Security Guide</h5>
+                    <p class="text-xs text-gray-600 mb-3">How to safely share Aadhaar, mask numbers, and protect your data.</p>
+                    <span class="text-xs text-indigo-600 font-semibold">Read More →</span>
+                </a>
+                <a href="/blog/gst-calculation.html" class="block bg-white rounded-xl shadow-md p-5 hover:shadow-lg transition">
+                    <div class="text-2xl mb-2">💼</div>
+                    <h5 class="text-lg font-bold text-gray-800 mb-2">GST Calculation Made Easy</h5>
+                    <p class="text-xs text-gray-600 mb-3">Understand GST rates, inclusive/exclusive calculations for Indian businesses.</p>
+                    <span class="text-xs text-indigo-600 font-semibold">Read More →</span>
+                </a>
+            </div>
+
+            <div class="text-center mt-8">
+                <a href="/blog/" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3 rounded-lg transition">
+                    View All Articles →
+                </a>
+            </div>
+        </section>
+
+        <!-- Feedback Section -->
+        <section id="feedback" class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl shadow-2xl p-8 md:p-12 mb-16 text-white">
+            <div class="max-w-3xl mx-auto text-center">
+                <h3 class="text-2xl md:text-3xl font-bold mb-4">💡 Help Us Build Better Tools</h3>
+                <p class="text-lg mb-6 opacity-90">
+                    What tools do you need? What problems can we solve? Your feedback drives our development.
+                </p>
+                <div class="bg-white bg-opacity-10 rounded-xl p-6 backdrop-blur">
+                    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <input type="text" name="name" placeholder="Your Name (optional)" class="px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-white">
+                            <input type="email" name="email" placeholder="Your Email (optional)" class="px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-white">
+                        </div>
+                        <select name="category" class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white focus:outline-none focus:ring-2 focus:ring-white">
+                            <option value="">What's this about?</option>
+                            <option value="new-tool">New Tool Request</option>
+                            <option value="bug-report">Bug Report</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="feedback">General Feedback</option>
+                        </select>
+                        <textarea name="message" rows="4" placeholder="Tell us your ideas, pain points, or feedback..." class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-white resize-none" required></textarea>
+                        <button type="submit" class="w-full md:w-auto bg-white text-indigo-600 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition">
+                            📨 Send Feedback
+                        </button>
+                    </form>
+                </div>
+                <p class="text-sm mt-4 opacity-75">We read every message and prioritize based on user demand.</p>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 md:p-12 mb-16">
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center">Why ToolsForIndia?</h3>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="text-5xl mb-4">🔒</div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">100% Privacy Safe</h4>
+                    <p class="text-sm text-gray-600">All calculations happen in your browser. No data sent to servers. No tracking. No storage. Your data stays with you.</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl mb-4">🇮🇳</div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Built for Indians</h4>
+                    <p class="text-sm text-gray-600">India-specific tax rules, PPF rates, SIP returns, UIDAI guidelines, GST calculations. Updated for FY 2024-25.</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl mb-4">⚡</div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Fast & Free</h4>
+                    <p class="text-sm text-gray-600">No registration, no login, no limits. Instant calculations. Export results as CSV/PDF. Free forever.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Email Capture -->
+        <section class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl shadow-2xl p-8 mb-12 text-white">
+            <div class="text-center max-w-2xl mx-auto">
+                <h3 class="text-2xl font-bold mb-3">📬 Get Latest Tools & Guides</h3>
+                <p class="text-lg mb-6 opacity-90">
+                    New calculators, tax updates, investment guides delivered to your inbox. Zero spam.
+                </p>
+                <div id="email-capture-form">
+                    <script async src="https://eomail5.com/form/b1c7edde-b94f-11f0-a6f5-556e730c5168.js" data-form="b1c7edde-b94f-11f0-a6f5-556e730c5168"></script>
+                </div>
+                <p class="text-xs mt-4 opacity-75">
+                    🔒 100% Privacy Safe • No Spam • Unsubscribe Anytime
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <span class="text-3xl">🇮🇳</span>
+                        <h4 class="text-lg font-bold text-white">ToolsForIndia</h4>
+                    </div>
+                    <p class="text-sm text-gray-400">Free financial calculators and security tools built by Indians for Indian users.</p>
+                </div>
+                <div>
+                    <h5 class="text-white font-semibold mb-3">Financial Tools</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/sip-calculator.html" class="hover:text-white">SIP Calculator</a></li>
+                        <li><a href="/ppf-calculator.html" class="hover:text-white">PPF Calculator</a></li>
+                        <li><a href="/income-tax-calculator.html" class="hover:text-white">Income Tax Calculator</a></li>
+                        <li><a href="/emi-calculator.html" class="hover:text-white">EMI Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-semibold mb-3">Security Tools</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/aadhaar-masker.html" class="hover:text-white">Aadhaar Masker</a></li>
+                        <li><a href="https://passwordchecker.in" target="_blank" class="hover:text-white">Password Checker</a></li>
+                        <li><a href="/pan-validator.html" class="hover:text-white">PAN Validator (Soon)</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-semibold mb-3">Resources</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/blog/" class="hover:text-white">Blog & Guides</a></li>
+                        <li><a href="/about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="/privacy.html" class="hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#feedback" class="hover:text-white">Send Feedback</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+                <p class="mb-2">© 2024 ToolsForIndia.com - Made with ❤️ by Indians for Indians</p>
+                <p class="text-xs">All tools are for educational purposes. Consult a financial advisor for investment decisions.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        #email-capture-form .eo-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        #email-capture-form .eo-form input[type="email"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        #email-capture-form .eo-form input[type="email"]::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+        #email-capture-form .eo-form button[type="submit"] {
+            width: 100%;
+            padding: 12px 24px;
+            background: white;
+            color: #4f46e5;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        #email-capture-form .eo-form button[type="submit"]:hover {
+            background: #f3f4f6;
+            transform: translateY(-2px);
+        }
+        @media (min-width: 768px) {
+            #email-capture-form .eo-form {
+                display: flex;
+                gap: 12px;
             }
-
-            // Common password short-circuit
-            if (commonPasswords.includes(password.toLowerCase())) {
-                return {
-                    formatted: 'instantly',
-                    seconds: 0,
-                    severity: 'bg-gradient-to-r from-red-600 to-red-700 text-white pulse-animation',
-                    advice: '⚠️ CRITICAL: This is a common password! Change immediately!',
-                    showShare: false
-                };
+            #email-capture-form .eo-form input[type="email"] {
+                flex: 1;
+                margin-bottom: 0;
             }
-
-            // Pattern penalty
-            const patternPenalty = detectPatterns(password);
-
-            // Charset size
-            let charset = 0;
-            if (/[a-z]/.test(password)) charset += 26;
-            if (/[A-Z]/.test(password)) charset += 26;
-            if (/[0-9]/.test(password)) charset += 10;
-            if (/[^a-zA-Z0-9]/.test(password)) charset += 33;
-
-            // Combinations and guesses per second
-            let combinations = Math.pow(charset, password.length) / patternPenalty;
-            const guessesPerSecond = 100_000_000_000; // 100B/s
-            const seconds = combinations / (2 * guessesPerSecond);
-
-            const formatted = formatCrackTime(seconds);
-            const severity = getCrackSeverityClass(seconds);
-            const advice = getCrackAdvice(seconds);
-            const showShare = seconds > 31_536_000; // > 1 year
-
-            return { formatted, seconds, severity, advice, showShare };
-        }
-
-        function detectPatterns(password) {
-            let penalty = 1;
-            if (/012|123|234|345|456|567|678|789/.test(password)) penalty *= 1000;   // sequential numbers
-            if (/abc|bcd|cde|def|xyz/i.test(password)) penalty *= 1000;             // sequential letters
-            if (/(.)\1{2,}/.test(password)) penalty *= 100;                          // repeats
-            if (/p@ss|p4ss|passw0rd/i.test(password)) penalty *= 10000;              // common subs
-            if (/qwerty|asdfgh|zxcvbn/i.test(password)) penalty *= 1000;             // keyboard
-            return penalty;
-        }
-
-        function formatCrackTime(seconds) {
-            if (seconds < 0.001) return 'instantly';
-            if (seconds < 1) return (seconds * 1000).toFixed(2) + ' milliseconds';
-            if (seconds < 60) return seconds.toFixed(2) + ' seconds';
-            if (seconds < 3600) return (seconds / 60).toFixed(2) + ' minutes';
-            if (seconds < 86400) return (seconds / 3600).toFixed(2) + ' hours';
-            if (seconds < 31536000) return Math.floor(seconds / 86400) + ' days';
-            const years = seconds / 31536000;
-            if (years < 1000) return Math.floor(years) + ' years';
-            if (years < 1_000_000) return (years / 1000).toFixed(1) + ' thousand years';
-            if (years < 1_000_000_000) return (years / 1_000_000).toFixed(2) + ' million years';
-            if (years < 1_000_000_000_000) return (years / 1_000_000_000).toFixed(2) + ' billion years';
-            return (years / 1_000_000_000_000).toFixed(2) + ' trillion years';
-        }
-
-        function getCrackSeverityClass(seconds) {
-            if (seconds < 1) return 'bg-gradient-to-r from-red-600 to-red-700 text-white pulse-animation';
-            if (seconds < 60) return 'bg-gradient-to-r from-red-500 to-orange-600 text-white';
-            if (seconds < 3600) return 'bg-gradient-to-r from-orange-500 to-yellow-500 text-white';
-            if (seconds < 86400) return 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900';
-            if (seconds < 2592000) return 'bg-gradient-to-r from-green-400 to-green-500 text-white';
-            if (seconds < 31536000) return 'bg-gradient-to-r from-green-500 to-blue-500 text-white';
-            return 'bg-gradient-to-r from-blue-600 to-purple-600 text-white';
-        }
-
-        function getCrackAdvice(seconds) {
-            if (seconds < 1) return '⚠️ CRITICAL: Change this password immediately!';
-            if (seconds < 60) return '❌ Extremely weak. A hacker could crack this in seconds.';
-            if (seconds < 3600) return '⚠️ Weak. Could be cracked in minutes. Add more characters.';
-            if (seconds < 86400) return '😐 Fair, but could be better. Try adding more complexity.';
-            if (seconds < 2592000) return '👍 Good, but consider making it stronger for critical accounts.';
-            if (seconds < 31536000) return '✅ Strong! This password would take months to crack.';
-            if (seconds < 31536000000) return '✅ Very Strong! This password would take years to crack.';
-            return '✨ Excellent! This password is virtually uncrackable with current technology.';
-        }
-
-        function updateCrackTimeDisplay(crackTime) {
-            if (!crackTimeContainer || !crackTimeValue || !crackTimeAdvice) return;
-            crackTimeContainer.classList.remove('hidden');
-            crackTimeValue.textContent = crackTime.formatted;
-            crackTimeAdvice.textContent = crackTime.advice;
-            crackTimeContainer.className = 'crack-time-display mb-6 rounded-xl p-6 text-center ' + crackTime.severity;
-            if (shareBtn) {
-                if (crackTime.showShare) shareBtn.classList.remove('hidden');
-                else shareBtn.classList.add('hidden');
+            #email-capture-form .eo-form button[type="submit"] {
+                width: auto;
             }
         }
+    </style>
 
-        // Share button handler
-        if (shareBtn) {
-            shareBtn.addEventListener('click', () => {
-                const time = crackTimeValue ? crackTimeValue.textContent : '';
-                const text = 'My password would take ' + time + ' to crack! 🔐 Check yours at passwordchecker.in';
-                if (navigator.share) {
-                    navigator.share({ title: 'Password Strength Test', text, url: 'https://passwordchecker.in' }).catch(() => {});
-                } else if (navigator.clipboard) {
-                    navigator.clipboard.writeText(text).then(() => {
-                        const originalText = shareBtn.textContent;
-                        shareBtn.textContent = '✓ Copied!';
-                        setTimeout(() => { shareBtn.textContent = originalText; }, 2000);
-                    });
-                }
-            });
-        }
-    </script>
 </body>
 </html>

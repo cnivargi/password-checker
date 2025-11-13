@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPF Calculator 2025 - Public Provident Fund Calculator with Tax Benefits | ToolsForIndia.com</title>
+    <meta name="description" content="Free PPF Calculator with year-by-year breakdown, tax benefit calculator, min vs max comparison. Calculate PPF maturity value with 7.1% interest rate for 2025.">
+    <meta name="keywords" content="PPF calculator, public provident fund calculator, PPF maturity calculator, PPF interest rate 2025, PPF tax benefit, Section 80C">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://toolsforindia.com/tools/ppf-calculator.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="PPF Calculator 2025 - Tax Benefits & Year-by-Year Breakdown">
+    <meta property="og:description" content="Free PPF Calculator with year-by-year breakdown, Section 80C tax calculator, and min vs max comparison. Current rate: 7.1%">
+    <meta property="og:url" content="https://toolsforindia.com/tools/ppf-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://toolsforindia.com/images/ppf-calculator-og.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PPF Calculator 2025 - Public Provident Fund Calculator">
+    <meta name="twitter:description" content="Calculate PPF maturity with tax benefits. Year-by-year breakdown included. Updated for 7.1% interest rate.">
+    <meta name="twitter:image" content="https://toolsforindia.com/images/ppf-calculator-og.png">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏦</text></svg>">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L252R36E5H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-L252R36E5H');
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "PPF Calculator 2025",
+      "applicationCategory": "FinanceApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      },
+      "operatingSystem": "Any",
+      "description": "Free PPF Calculator with year-by-year breakdown, Section 80C tax benefit calculator, and comparison tools for Indian investors.",
+      "featureList": "Year-by-year breakdown, Tax benefit calculator, Min vs Max comparison, Legacy planning, Export to PDF/CSV"
+    }
+    </script>
+    
+    <style>
+        .mode-tab { transition: all 0.3s ease; cursor: pointer; }
+        .mode-tab.active { background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4); }
+        .year-row { transition: all 0.2s ease; }
+        .year-row:hover { background: #f9fafb; }
+        .animate-fade { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-amber-50 to-orange-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <!-- Header -->
+        <header class="mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <a href="/" class="text-2xl font-bold text-orange-600 hover:text-orange-700">🇮🇳 ToolsForIndia.com</a>
+                <div class="text-sm">
+                    <a href="/tools/" class="text-gray-600 hover:text-orange-600 mx-2">All Tools</a>
+                    <a href="/blog/" class="text-gray-600 hover:text-orange-600 mx-2">Blog</a>
+                </div>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">🏦 PPF Calculator 2025</h1>
+            <p class="text-lg text-gray-600">Monthly-accurate calculation • Tax benefits • Min vs Max • Legacy planning</p>
+            <div class="mt-4 inline-block bg-green-100 text-green-800 px-4 py-2 rounded-lg text-sm font-semibold">
+                ✅ Current PPF Interest Rate: 7.1% p.a. (Q4 FY 2024-25)
+            </div>
+        </header>
+
+        <!-- Mode Selection -->
+        <div class="bg-white rounded-2xl shadow-lg p-4 mb-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="mode-tab active rounded-xl p-4 text-center border-2 border-gray-200" data-mode="calculate">
+                    <div class="text-2xl mb-1">💰</div>
+                    <div class="font-semibold text-sm">Calculate PPF</div>
+                </div>
+                <div class="mode-tab rounded-xl p-4 text-center border-2 border-gray-200" data-mode="compare">
+                    <div class="text-2xl mb-1">⚖️</div>
+                    <div class="font-semibold text-sm">Min vs Max</div>
+                </div>
+                <div class="mode-tab rounded-xl p-4 text-center border-2 border-gray-200" data-mode="tax">
+                    <div class="text-2xl mb-1">💸</div>
+                    <div class="font-semibold text-sm">Tax Benefits</div>
+                </div>
+                <div class="mode-tab rounded-xl p-4 text-center border-2 border-gray-200" data-mode="legacy">
+                    <div class="text-2xl mb-1">👨‍👩‍👧</div>
+                    <div class="font-semibold text-sm">Legacy Planning</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculate Mode -->
+        <div id="calculateMode" class="mode-content">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Input Panel -->
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">PPF Investment Details</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Annual Deposit (₹)</label>
+                            <input type="number" id="annualDeposit" value="150000" min="500" max="150000" step="1000" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none text-lg">
+                            <div class="flex justify-between mt-2 text-xs text-gray-500">
+                                <span>Min: ₹500</span>
+                                <span>Max: ₹1,50,000</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Tenure (Years)</label>
+                            <input type="number" id="tenure" value="15" min="15" max="50" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none text-lg">
+                            <div class="text-xs text-gray-500 mt-1">Minimum: 15 years (Lock-in period)</div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Interest Rate (% p.a.)</label>
+                            <input type="number" id="interestRate" value="7.1" min="6" max="10" step="0.1" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none text-lg">
+                            <div class="text-xs text-gray-500 mt-1">Current rate: 7.1% (Q4 FY 2024-25)</div>
+                        </div>
+
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                            <label class="flex items-center cursor-pointer">
+                                <input type="checkbox" id="showYearly" class="mr-3 w-5 h-5" checked>
+                                <span class="font-semibold text-gray-700">Show Year-by-Year Breakdown</span>
+                            </label>
+                        </div>
+
+                        <button id="calculateBtn" class="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold py-4 rounded-lg text-lg transition transform hover:scale-105">
+                            Calculate Maturity Value
+                        </button>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <button id="shareBtn" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition hidden">
+                                📤 Share
+                            </button>
+                            <button id="exportBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition hidden">
+                                📥 Export
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Panel -->
+                <div id="resultsPanel" class="hidden">
+                    <div id="resultsSummary" class="bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl shadow-2xl p-6 text-white mb-6 animate-fade">
+                        <h2 class="text-2xl font-bold mb-6 text-center">PPF Maturity Summary</h2>
+                        
+                        <div class="bg-white bg-opacity-30 rounded-xl p-6 text-center mb-4">
+                            <div class="text-sm opacity-90 mb-2">MATURITY VALUE</div>
+                            <div class="text-5xl font-bold mb-2" id="maturityValue">₹0</div>
+                            <div class="text-sm opacity-90" id="tenureSummary"></div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white bg-opacity-20 rounded-xl p-4">
+                                <div class="text-sm opacity-90 mb-1">Total Deposited</div>
+                                <div class="text-2xl font-bold" id="totalDeposited">₹0</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-xl p-4">
+                                <div class="text-sm opacity-90 mb-1">Total Interest</div>
+                                <div class="text-2xl font-bold" id="totalInterest">₹0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+                        <canvas id="ppfChart"></canvas>
+                    </div>
+
+                    <div id="yearlyBreakdown" class="bg-white rounded-2xl shadow-lg p-6 hidden">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">📊 Year-by-Year Breakdown</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th class="p-2 text-left">Year</th>
+                                        <th class="p-2 text-right">Deposit</th>
+                                        <th class="p-2 text-right">Interest</th>
+                                        <th class="p-2 text-right">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="yearlyTable"></tbody>
+                            </table>
+                        </div>
+                        <button id="exportCSVBtn" class="mt-4 w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 rounded-lg transition">
+                            📄 Export Table to CSV
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compare Mode -->
+        <div id="compareMode" class="mode-content hidden">
+            <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+                <h2 class="text-xl font-bold text-gray-800 mb-6">⚖️ Compare: Minimum vs Maximum Deposits</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Tenure (Years)</label>
+                        <input type="number" id="compareTenure" value="15" min="15" max="50" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none text-lg">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Interest Rate (% p.a.)</label>
+                        <input type="number" id="compareRate" value="7.1" min="6" max="10" step="0.1" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none text-lg">
+                    </div>
+                </div>
+
+                <button id="compareBtn" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-4 rounded-lg text-lg transition">
+                    Compare Min vs Max
+                </button>
+            </div>
+
+            <div id="comparisonResults" class="hidden">
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-yellow-500">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">💵 Minimum (₹500/year)</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Total Deposited:</span>
+                                <span class="font-bold" id="minDeposited">₹0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Total Interest:</span>
+                                <span class="font-bold text-green-600" id="minInterest">₹0</span>
+                            </div>
+                            <div class="flex justify-between pt-3 border-t-2">
+                                <span class="text-gray-800 font-semibold">Maturity Value:</span>
+                                <span class="font-bold text-xl text-orange-600" id="minMaturity">₹0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-green-500">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">💰 Maximum (₹1.5L/year)</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Total Deposited:</span>
+                                <span class="font-bold" id="maxDeposited">₹0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Total Interest:</span>
+                                <span class="font-bold text-green-600" id="maxInterest">₹0</span>
+                            </div>
+                            <div class="flex justify-between pt-3 border-t-2">
+                                <span class="text-gray-800 font-semibold">Maturity Value:</span>
+                                <span class="font-bold text-xl text-green-600" id="maxMaturity">₹0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl shadow-lg p-6 text-white mb-6">
+                    <h3 class="text-xl font-bold mb-4 text-center">💡 Key Insights</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                            <div class="text-sm opacity-90 mb-1">Difference in Returns</div>
+                            <div class="text-2xl font-bold" id="returnDifference">₹0</div>
+                        </div>
+                        <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                            <div class="text-sm opacity-90 mb-1">Extra Wealth Created</div>
+                            <div class="text-2xl font-bold" id="wealthMultiplier">0x</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tax Benefits Mode -->
+        <div id="taxMode" class="mode-content hidden">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">💸 Tax Benefit Calculator</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Annual PPF Deposit (₹)</label>
+                            <input type="number" id="taxDeposit" value="150000" min="500" max="150000" step="1000" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none text-lg">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Your Tax Bracket</label>
+                            <select id="taxBracket" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none text-lg">
+                                <option value="0">₹0 - ₹2.5L (0%)</option>
+                                <option value="5">₹2.5L - ₹5L (5%)</option>
+                                <option value="10">₹5L - ₹7.5L (10%)</option>
+                                <option value="15">₹7.5L - ₹10L (15%)</option>
+                                <option value="20">₹10L - ₹12.5L (20%)</option>
+                                <option value="25">₹12.5L - ₹15L (25%)</option>
+                                <option value="30" selected>Above ₹15L (30%)</option>
+                            </select>
+                            <div class="text-xs text-gray-500 mt-1">New tax regime rates (FY 2024-25)</div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Other 80C Investments (₹)</label>
+                            <input type="number" id="other80C" value="0" min="0" max="150000" step="1000" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none text-lg">
+                            <div class="text-xs text-gray-500 mt-1">ELSS, LIC, Tuition fees, etc.</div>
+                        </div>
+
+                        <button id="calculateTaxBtn" class="w-full bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white font-bold py-4 rounded-lg text-lg transition transform hover:scale-105">
+                            Calculate Tax Savings
+                        </button>
+                    </div>
+                </div>
+
+                <div id="taxResults" class="hidden">
+                    <div class="bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl shadow-2xl p-6 text-white mb-6 animate-fade">
+                        <h2 class="text-2xl font-bold mb-6 text-center">Tax Savings Summary</h2>
+                        
+                        <div class="bg-white bg-opacity-30 rounded-xl p-6 text-center mb-4">
+                            <div class="text-sm opacity-90 mb-2">TOTAL TAX SAVED</div>
+                            <div class="text-5xl font-bold mb-2" id="taxSaved">₹0</div>
+                            <div class="text-sm opacity-90">Under Section 80C</div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                                <div class="text-sm opacity-90 mb-1">Eligible for Deduction</div>
+                                <div class="text-2xl font-bold" id="eligibleDeduction">₹0</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                                <div class="text-sm opacity-90 mb-1">Effective Cost</div>
+                                <div class="text-2xl font-bold" id="effectiveCost">₹0</div>
+                                <div class="text-xs opacity-75 mt-1">After tax savings</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <h3 class="font-bold text-gray-800 mb-4">💡 EEE Status Explained</h3>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li class="flex items-start">
+                                <span class="text-green-600 mr-2 font-bold">E</span>
+                                <span><strong>Exempt at Entry:</strong> Deposit eligible for 80C deduction (up to ₹1.5L)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-600 mr-2 font-bold">E</span>
+                                <span><strong>Exempt at Growth:</strong> Interest earned is tax-free</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-600 mr-2 font-bold">E</span>
+                                <span><strong>Exempt at Exit:</strong> Maturity amount is completely tax-free</span>
+                            </li>
+                        </ul>
+                        <div class="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded">
+                            <p class="text-sm text-yellow-900"><strong>Note:</strong> PPF offers triple tax exemption - one of the best tax-saving instruments in India!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legacy Planning Mode -->
+        <div id="legacyMode" class="mode-content hidden">
+            <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+                <h2 class="text-xl font-bold text-gray-800 mb-6">👨‍👩‍👧 Legacy Planning: Start Early vs Start Late</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="border-2 border-blue-300 rounded-lg p-4">
+                        <h3 class="font-bold text-blue-700 mb-4">Scenario A: Start Early</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-gray-600 text-sm mb-1">Starting Age</label>
+                                <input type="number" id="earlyAge" value="18" min="1" max="60" class="w-full px-3 py-2 border-2 border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 text-sm mb-1">Annual Deposit (₹)</label>
+                                <input type="number" id="earlyDeposit" value="50000" min="500" max="150000" step="1000" class="w-full px-3 py-2 border-2 border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 text-sm mb-1">Investment Years</label>
+                                <input type="number" id="earlyYears" value="15" min="15" max="50" class="w-full px-3 py-2 border-2 border-gray-300 rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-2 border-orange-300 rounded-lg p-4">
+                        <h3 class="font-bold text-orange-700 mb-4">Scenario B: Start Late</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-gray-600 text-sm mb-1">Starting Age</label>
+                                <input type="number" id="lateAge" value="35" min="1" max="60" class="w-full px-3 py-2 border-2 border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 text-sm mb-1">Annual Deposit (₹)</label>
+                                <input type="number" id="lateDeposit" value="100000" min="500" max="150000" step="1000" class="w-full px-3 py-2 border-2 border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 text-sm mb-1">Investment Years</label>
+                                <input type="number" id="lateYears" value="15" min="15" max="50" class="w-full px-3 py-2 border-2 border-gray-300 rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Interest Rate (% p.a.)</label>
+                    <input type="number" id="legacyRate" value="7.1" min="6" max="10" step="0.1" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none text-lg">
+                </div>
+
+                <button id="legacyBtn" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 rounded-lg text-lg transition">
+                    Compare Scenarios
+                </button>
+            </div>
+
+            <div id="legacyResults" class="hidden">
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-blue-50 rounded-2xl shadow-lg p-6 border-l-4 border-blue-500">
+                        <h3 class="text-xl font-bold text-blue-800 mb-4">📘 Scenario A (Early Start)</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Starting Age:</span>
+                                <span class="font-bold" id="earlyStartAge">18</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Maturity Age:</span>
+                                <span class="font-bold" id="earlyMaturityAge">33</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Total Deposited:</span>
+                                <span class="font-bold" id="earlyTotalDeposit">₹0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Interest Earned:</span>
+                                <span class="font-bold text-green-600" id="earlyTotalInterest">₹0</span>
+                            </div>
+                            <div class="flex justify-between pt-3 border-t-2 border-blue-200">
+                                <span class="text-gray-800 font-semibold">Maturity Value:</span>
+                                <span class="font-bold text-2xl text-blue-600" id="earlyMaturityValue">₹0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-orange-50 rounded-2xl shadow-lg p-6 border-l-4 border-orange-500">
+                        <h3 class="text-xl font-bold text-orange-800 mb-4">📙 Scenario B (Late Start)</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Starting Age:</span>
+                                <span class="font-bold" id="lateStartAge">35</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Maturity Age:</span>
+                                <span class="font-bold" id="lateMaturityAge">50</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Total Deposited:</span>
+                                <span class="font-bold" id="lateTotalDeposit">₹0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Interest Earned:</span>
+                                <span class="font-bold text-green-600" id="lateTotalInterest">₹0</span>
+                            </div>
+                            <div class="flex justify-between pt-3 border-t-2 border-orange-200">
+                                <span class="text-gray-800 font-semibold">Maturity Value:</span>
+                                <span class="font-bold text-2xl text-orange-600" id="lateMaturityValue">₹0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl shadow-lg p-6 text-white">
+                    <h3 class="text-xl font-bold mb-4 text-center">🎯 The Winner</h3>
+                    <div class="bg-white bg-opacity-20 rounded-xl p-6 text-center">
+                        <div class="text-sm opacity-90 mb-2" id="winnerLabel">Better Strategy</div>
+                        <div class="text-4xl font-bold mb-2" id="winnerName">-</div>
+                        <div class="text-lg" id="winnerAdvantage">₹0 more wealth</div>
+                    </div>
+                    <div class="mt-4 bg-white bg-opacity-20 rounded-lg p-4">
+                        <p class="text-sm" id="winnerInsight"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mt-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">📚 About PPF (Public Provident Fund)</h2>
+            <div class="grid md:grid-cols-2 gap-6 text-gray-700">
+                <div>
+                    <h3 class="font-bold text-lg mb-2">Key Features</h3>
+                    <ul class="text-sm space-y-1 mb-4">
+                        <li>• Government-backed, 100% safe investment</li>
+                        <li>• Lock-in period: 15 years (extendable)</li>
+                        <li>• Minimum deposit: ₹500/year</li>
+                        <li>• Maximum deposit: ₹1,50,000/year</li>
+                        <li>• Interest rate: 7.1% p.a. (Q4 FY 2024-25)</li>
+                        <li>• EEE status: Tax-free at all stages</li>
+                    </ul>
+                    
+                    <h3 class="font-bold text-lg mb-2">Who Should Invest?</h3>
+                    <ul class="text-sm space-y-1">
+                        <li>• Risk-averse investors seeking guaranteed returns</li>
+                        <li>• Those looking for long-term wealth creation</li>
+                        <li>• Investors wanting tax benefits (80C)</li>
+                        <li>• Parents planning for children's future</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-2">Important Rules</h3>
+                    <ul class="text-sm space-y-1 mb-4">
+                        <li>• Partial withdrawal allowed after 7th year</li>
+                        <li>• Loan facility available from 3rd to 6th year</li>
+                        <li>• Can be extended in blocks of 5 years after maturity</li>
+                        <li>• One account per person (adult)</li>
+                        <li>• Can open for minors (guardian managed)</li>
+                    </ul>
+                    
+                    <h3 class="font-bold text-lg mb-2">Pro Tips</h3>
+                    <ul class="text-sm space-y-1">
+                        <li>• Deposit before 5th of month for that month's interest</li>
+                        <li>• Maximize ₹1.5L deposit for best returns</li>
+                        <li>• Open early in financial year for compounding benefit</li>
+                        <li>• Consider for your child starting at young age</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-600 text-sm mt-8">
+            <p class="mb-2">
+                <a href="/" class="hover:text-orange-600 underline">Home</a> | 
+                <a href="/tools/" class="hover:text-orange-600 underline">All Tools</a> | 
+                <a href="/blog/" class="hover:text-orange-600 underline">Blog</a>
+            </p>
+            <p class="text-xs text-gray-500">Interest rates are set by Government of India and may change quarterly. This calculator provides estimates only. Consult official PPF guidelines for accurate information.</p>
+        </footer>
+    </div>
+
+    <script>
+        let ppfChart = null;
+        let comparisonChart = null;
+        let yearlyData = [];
+
+        // GA4 Event Tracking
+        function trackEvent(action, category, label) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', action, {
+                    'event_category': category,
+                    'event_label': label
+                });
+            }
+        }
+
+        // Mode Switching
+        document.querySelectorAll('.mode-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const mode = tab.dataset.mode;
+                trackEvent('mode_switch', 'Navigation', mode);
+                document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                document.querySelectorAll('.mode-content').forEach(c => c.classList.add('hidden'));
+                document.getElementById(`${mode}Mode`).classList.remove('hidden');
+            });
+        });
+
+        // Calculate PPF with MONTHLY-ACCURATE LOGIC
+        document.getElementById('calculateBtn').addEventListener('click', () => {
+            calculatePPF();
+            trackEvent('calculate_ppf', 'Calculation', 'basic_mode');
+        });
+
+        function calculatePPF() {
+            const annual = parseFloat(document.getElementById('annualDeposit').value);
+            const years = parseFloat(document.getElementById('tenure').value);
+            const annualRate = parseFloat(document.getElementById('interestRate').value) / 100;
+            const showYearly = document.getElementById('showYearly').checked;
+
+            // MONTHLY-ACCURATE PPF CALCULATION
+            // PPF interest is calculated monthly on the lowest balance between 5th and last day
+            // For simplicity, we assume deposit made on 5th of April each year
+            const monthlyRate = annualRate / 12;
+            
+            let balance = 0;
+            let totalDeposit = 0;
+            yearlyData = [];
+
+            for (let year = 1; year <= years; year++) {
+                let yearStartBalance = balance;
+                balance += annual; // Deposit at start of year
+                totalDeposit += annual;
+                
+                let yearInterest = 0;
+                // Calculate monthly interest for 12 months
+                for (let month = 1; month <= 12; month++) {
+                    const monthInterest = balance * monthlyRate;
+                    yearInterest += monthInterest;
+                    balance += monthInterest;
+                }
+                
+                yearlyData.push({
+                    year: year,
+                    deposit: annual,
+                    interest: yearInterest,
+                    balance: balance
+                });
+            }
+
+            const maturity = balance;
+            const totalInterest = maturity - totalDeposit;
+
+            document.getElementById('maturityValue').textContent = formatCurrency(maturity);
+            document.getElementById('totalDeposited').textContent = formatCurrency(totalDeposit);
+            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+            document.getElementById('tenureSummary').textContent = `After ${years} years at ${(annualRate*100).toFixed(1)}% p.a.`;
+
+            document.getElementById('resultsPanel').classList.remove('hidden');
+            document.getElementById('shareBtn').classList.remove('hidden');
+            document.getElementById('exportBtn').classList.remove('hidden');
+
+            if (showYearly) {
+                displayYearlyBreakdown(yearlyData);
+            } else {
+                document.getElementById('yearlyBreakdown').classList.add('hidden');
+            }
+
+            drawPPFChart(totalDeposit, totalInterest);
+        }
+
+        function displayYearlyBreakdown(data) {
+            const tbody = document.getElementById('yearlyTable');
+            tbody.innerHTML = data.map(row => `
+                <tr class="year-row border-b">
+                    <td class="p-2 font-semibold">Year ${row.year}</td>
+                    <td class="p-2 text-right">${formatCurrency(row.deposit)}</td>
+                    <td class="p-2 text-right text-green-600">${formatCurrency(row.interest)}</td>
+                    <td class="p-2 text-right font-bold">${formatCurrency(row.balance)}</td>
+                </tr>
+            `).join('');
+            document.getElementById('yearlyBreakdown').classList.remove('hidden');
+        }
+
+        function formatCurrency(amount) {
+            return '₹' + amount.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+        }
+
+        function drawPPFChart(deposit, interest) {
+            const ctx = document.getElementById('ppfChart');
+            if (ppfChart) ppfChart.destroy();
+
+            ppfChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Your Deposits', 'Interest Earned'],
+                    datasets: [{
+                        data: [deposit, interest],
+                        backgroundColor: ['#f59e0b', '#10b981'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { font: { size: 14 }, padding: 20 }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + formatCurrency(context.parsed);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Share with URL parameters
+        document.getElementById('shareBtn').addEventListener('click', () => {
+            const annual = document.getElementById('annualDeposit').value;
+            const years = document.getElementById('tenure').value;
+            const rate = document.getElementById('interestRate').value;
+            
+            const url = `${window.location.origin}${window.location.pathname}?a=${annual}&y=${years}&r=${rate}`;
+            
+            trackEvent('share_calculation', 'Engagement', 'ppf_share');
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My PPF Calculation',
+                    text: `Check out my PPF calculation: ₹${parseFloat(annual).toLocaleString('en-IN')}/year for ${years} years`,
+                    url: url
+                });
+            } else {
+                navigator.clipboard.writeText(url);
+                alert('Link copied to clipboard! Share it with anyone.');
+            }
+        });
+
+        // Export to PDF
+        document.getElementById('exportBtn').addEventListener('click', async () => {
+            trackEvent('export_pdf', 'Engagement', 'ppf_export');
+            
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+            
+            const annual = document.getElementById('annualDeposit').value;
+            const years = document.getElementById('tenure').value;
+            const rate = document.getElementById('interestRate').value;
+            const totalDep = document.getElementById('totalDeposited').textContent;
+            const totalInt = document.getElementById('totalInterest').textContent;
+            const maturity = document.getElementById('maturityValue').textContent;
+            
+            pdf.setFontSize(20);
+            pdf.text('PPF Calculator Results', 20, 20);
+            
+            pdf.setFontSize(12);
+            pdf.text(`Annual Deposit: ₹${parseFloat(annual).toLocaleString('en-IN')}`, 20, 40);
+            pdf.text(`Interest Rate: ${rate}% p.a.`, 20, 50);
+            pdf.text(`Tenure: ${years} years`, 20, 60);
+            
+            pdf.setFontSize(14);
+            pdf.text('Summary:', 20, 80);
+            pdf.setFontSize(12);
+            pdf.text(`Total Deposited: ${totalDep}`, 20, 90);
+            pdf.text(`Total Interest: ${totalInt}`, 20, 100);
+            pdf.text(`Maturity Value: ${maturity}`, 20, 110);
+            
+            pdf.setFontSize(10);
+            pdf.text('Monthly-accurate calculation | Generated at ToolsForIndia.com', 20, 130);
+            pdf.text(new Date().toLocaleDateString('en-IN'), 20, 140);
+            
+            pdf.save('PPF-Calculation.pdf');
+        });
+
+        // Export CSV
+        document.getElementById('exportCSVBtn').addEventListener('click', () => {
+            trackEvent('export_csv', 'Engagement', 'ppf_csv_export');
+            
+            let csv = 'Year,Annual Deposit,Interest Earned,Balance\n';
+            yearlyData.forEach(row => {
+                csv += `${row.year},${row.deposit.toFixed(0)},${row.interest.toFixed(0)},${row.balance.toFixed(0)}\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'PPF-YearlyBreakdown.csv';
+            a.click();
+        });
+
+        // Load from URL parameters
+        window.addEventListener('load', () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('a')) {
+                document.getElementById('annualDeposit').value = params.get('a');
+                document.getElementById('tenure').value = params.get('y');
+                document.getElementById('interestRate').value = params.get('r');
+                calculatePPF();
+            }
+        });
+
+        // Compare Min vs Max
+        document.getElementById('compareBtn').addEventListener('click', () => {
+            compareMinMax();
+            trackEvent('compare_min_max', 'Calculation', 'compare_mode');
+        });
+
+        function compareMinMax() {
+            const years = parseFloat(document.getElementById('compareTenure').value);
+            const rate = parseFloat(document.getElementById('compareRate').value) / 100;
+
+            const minAnnual = 500;
+            const maxAnnual = 150000;
+
+            const minResult = calculateMaturity(minAnnual, years, rate);
+            const maxResult = calculateMaturity(maxAnnual, years, rate);
+
+            document.getElementById('minDeposited').textContent = formatCurrency(minResult.totalDeposit);
+            document.getElementById('minInterest').textContent = formatCurrency(minResult.totalInterest);
+            document.getElementById('minMaturity').textContent = formatCurrency(minResult.maturity);
+
+            document.getElementById('maxDeposited').textContent = formatCurrency(maxResult.totalDeposit);
+            document.getElementById('maxInterest').textContent = formatCurrency(maxResult.totalInterest);
+            document.getElementById('maxMaturity').textContent = formatCurrency(maxResult.maturity);
+
+            const difference = maxResult.maturity - minResult.maturity;
+            const multiplier = (maxResult.maturity / minResult.maturity).toFixed(1);
+
+            document.getElementById('returnDifference').textContent = formatCurrency(difference);
+            document.getElementById('wealthMultiplier').textContent = multiplier + 'x';
+
+            document.getElementById('comparisonResults').classList.remove('hidden');
+
+            drawComparisonChart(minResult, maxResult);
+        }
+
+        function calculateMaturity(annual, years, annualRate) {
+            const monthlyRate = annualRate / 12;
+            let balance = 0;
+            let totalDeposit = 0;
+
+            for (let year = 1; year <= years; year++) {
+                balance += annual;
+                totalDeposit += annual;
+                
+                for (let month = 1; month <= 12; month++) {
+                    balance += balance * monthlyRate;
+                }
+            }
+
+            return {
+                totalDeposit: totalDeposit,
+                totalInterest: balance - totalDeposit,
+                maturity: balance
+            };
+        }
+
+        function drawComparisonChart(minResult, maxResult) {
+            const ctx = document.getElementById('comparisonChart');
+            if (comparisonChart) comparisonChart.destroy();
+
+            comparisonChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Minimum (₹500/year)', 'Maximum (₹1.5L/year)'],
+                    datasets: [
+                        {
+                            label: 'Deposits',
+                            data: [minResult.totalDeposit, maxResult.totalDeposit],
+                            backgroundColor: '#f59e0b'
+                        },
+                        {
+                            label: 'Interest',
+                            data: [minResult.totalInterest, maxResult.totalInterest],
+                            backgroundColor: '#10b981'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: { stacked: true },
+                        y: { 
+                            stacked: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '₹' + (value / 100000).toFixed(0) + 'L';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + formatCurrency(context.parsed.y);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Tax Calculator
+        document.getElementById('calculateTaxBtn').addEventListener('click', () => {
+            calculateTax();
+            trackEvent('calculate_tax', 'Calculation', 'tax_mode');
+        });
+
+        function calculateTax() {
+            const deposit = parseFloat(document.getElementById('taxDeposit').value);
+            const taxRate = parseFloat(document.getElementById('taxBracket').value) / 100;
+            const other80C = parseFloat(document.getElementById('other80C').value);
+
+            const totalInvestment = deposit + other80C;
+            const eligible = Math.min(totalInvestment, 150000);
+            const taxSaved = eligible * taxRate;
+            const effectiveCost = deposit - (Math.min(deposit, eligible - other80C) * taxRate);
+
+            document.getElementById('eligibleDeduction').textContent = formatCurrency(eligible);
+            document.getElementById('taxSaved').textContent = formatCurrency(taxSaved);
+            document.getElementById('effectiveCost').textContent = formatCurrency(effectiveCost);
+
+            document.getElementById('taxResults').classList.remove('hidden');
+        }
+
+        // Legacy Planning
+        document.getElementById('legacyBtn').addEventListener('click', () => {
+            compareLegacy();
+            trackEvent('compare_legacy', 'Calculation', 'legacy_mode');
+        });
+
+        function compareLegacy() {
+            const earlyAge = parseInt(document.getElementById('earlyAge').value);
+            const earlyDeposit = parseFloat(document.getElementById('earlyDeposit').value);
+            const earlyYears = parseFloat(document.getElementById('earlyYears').value);
+
+            const lateAge = parseInt(document.getElementById('lateAge').value);
+            const lateDeposit = parseFloat(document.getElementById('lateDeposit').value);
+            const lateYears = parseFloat(document.getElementById('lateYears').value);
+
+            const rate = parseFloat(document.getElementById('legacyRate').value) / 100;
+
+            const earlyResult = calculateMaturity(earlyDeposit, earlyYears, rate);
+            const lateResult = calculateMaturity(lateDeposit, lateYears, rate);
+
+            document.getElementById('earlyStartAge').textContent = earlyAge;
+            document.getElementById('earlyMaturityAge').textContent = earlyAge + earlyYears;
+            document.getElementById('earlyTotalDeposit').textContent = formatCurrency(earlyResult.totalDeposit);
+            document.getElementById('earlyTotalInterest').textContent = formatCurrency(earlyResult.totalInterest);
+            document.getElementById('earlyMaturityValue').textContent = formatCurrency(earlyResult.maturity);
+
+            document.getElementById('lateStartAge').textContent = lateAge;
+            document.getElementById('lateMaturityAge').textContent = lateAge + lateYears;
+            document.getElementById('lateTotalDeposit').textContent = formatCurrency(lateResult.totalDeposit);
+            document.getElementById('lateTotalInterest').textContent = formatCurrency(lateResult.totalInterest);
+            document.getElementById('lateMaturityValue').textContent = formatCurrency(lateResult.maturity);
+
+            const winner = earlyResult.maturity > lateResult.maturity ? 'early' : 'late';
+            const advantage = Math.abs(earlyResult.maturity - lateResult.maturity);
+
+            if (winner === 'early') {
+                document.getElementById('winnerName').textContent = '🏆 Start Early Wins!';
+                document.getElementById('winnerAdvantage').textContent = formatCurrency(advantage) + ' more wealth';
+                document.getElementById('winnerInsight').textContent = `Starting at age ${earlyAge} with ₹${(earlyDeposit/1000).toFixed(0)}K/year creates more wealth than starting at ${lateAge} with ₹${(lateDeposit/1000).toFixed(0)}K/year. Time beats money!`;
+            } else {
+                document.getElementById('winnerName').textContent = '🏆 Late Start Wins!';
+                document.getElementById('winnerAdvantage').textContent = formatCurrency(advantage) + ' more wealth';
+                document.getElementById('winnerInsight').textContent = `The higher investment of ₹${(lateDeposit/1000).toFixed(0)}K/year overcomes the late start. But imagine if you started early with this amount!`;
+            }
+
+            document.getElementById('legacyResults').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

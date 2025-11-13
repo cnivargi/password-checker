@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIP Calculator 2025 - Plan Your Mutual Fund Investment | ToolsForIndia.com</title>
+    <meta name="description" content="Free SIP Calculator with goal-based planning, step-up SIP, scenario comparison & investment tracker. Calculate monthly SIP for ₹1 crore target. Track your progress monthly.">
+    <meta name="keywords" content="SIP calculator, mutual fund SIP, goal based SIP calculator, step up SIP, SIP return calculator, monthly SIP planner">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://toolsforindia.com/tools/sip-calculator.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="SIP Calculator 2025 - Goal-based Planning & Investment Tracker">
+    <meta property="og:description" content="Free SIP Calculator with goal planning, step-up SIP, and monthly tracking. Calculate returns for ₹1 crore target.">
+    <meta property="og:url" content="https://toolsforindia.com/tools/sip-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://toolsforindia.com/images/sip-calculator-og.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SIP Calculator 2025 - Plan Your Mutual Fund Investment">
+    <meta name="twitter:description" content="Free SIP Calculator with goal-based planning, step-up SIP, scenario comparison & investment tracker.">
+    <meta name="twitter:image" content="https://toolsforindia.com/images/sip-calculator-og.png">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L252R36E5H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-L252R36E5H');
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "SIP Calculator 2025",
+      "applicationCategory": "FinanceApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      },
+      "operatingSystem": "Any",
+      "description": "Free SIP Calculator with goal-based planning, step-up SIP, scenario comparison and investment tracker for Indian mutual fund investors.",
+      "featureList": "Goal-based planning, Step-up SIP, Investment tracking, Scenario comparison, Export to PDF/CSV"
+    }
+    </script>
+    
+    <style>
+        .mode-tab { transition: all 0.3s ease; cursor: pointer; }
+        .mode-tab.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
+        .result-card { transition: all 0.4s ease; }
+        .animate-slide-up { animation: slideUp 0.5s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .comparison-card { transition: all 0.3s ease; }
+        .comparison-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <!-- Header -->
+        <header class="mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <a href="/" class="text-2xl font-bold text-indigo-600 hover:text-indigo-700">🇮🇳 ToolsForIndia.com</a>
+                <div class="text-sm">
+                    <a href="/tools/" class="text-gray-600 hover:text-indigo-600 mx-2">All Tools</a>
+                    <a href="/blog/" class="text-gray-600 hover:text-indigo-600 mx-2">Blog</a>
+                </div>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">📈 SIP Calculator 2025</h1>
+            <p class="text-lg text-gray-600">Goal-based planning • Step-up SIP • Scenario comparison • Investment tracker</p>
+        </header>
+
+        <!-- Mode Selection -->
+        <div class="bg-white rounded-2xl shadow-lg p-4 mb-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="mode-tab active rounded-xl p-4 text-center border-2 border-gray-200" data-mode="calculate">
+                    <div class="text-2xl mb-1">🎯</div>
+                    <div class="font-semibold text-sm">Calculate Returns</div>
+                </div>
+                <div class="mode-tab rounded-xl p-4 text-center border-2 border-gray-200" data-mode="goal">
+                    <div class="text-2xl mb-1">💰</div>
+                    <div class="font-semibold text-sm">Goal Planning</div>
+                </div>
+                <div class="mode-tab rounded-xl p-4 text-center border-2 border-gray-200" data-mode="compare">
+                    <div class="text-2xl mb-1">📊</div>
+                    <div class="font-semibold text-sm">Compare Scenarios</div>
+                </div>
+                <div class="mode-tab rounded-xl p-4 text-center border-2 border-gray-200" data-mode="track">
+                    <div class="text-2xl mb-1">📈</div>
+                    <div class="font-semibold text-sm">Track Progress</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculate Mode -->
+        <div id="calculateMode" class="mode-content">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Input Panel -->
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">Investment Details</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Monthly Investment (₹)</label>
+                            <input type="number" id="monthly" value="5000" min="500" step="500" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none text-lg">
+                            <div class="flex justify-between mt-2 text-xs text-gray-500">
+                                <span>₹500</span>
+                                <span>₹50,000+</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Expected Return Rate (% p.a.)</label>
+                            <div class="flex items-center gap-3">
+                                <input type="range" id="returnSlider" min="6" max="18" value="12" step="0.5" class="flex-1">
+                                <input type="number" id="returnRate" value="12" min="6" max="18" step="0.5" class="w-20 px-3 py-2 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none">
+                                <span class="text-gray-700 font-semibold">%</span>
+                            </div>
+                            <div class="flex justify-between mt-2 text-xs text-gray-500">
+                                <span>Conservative: 6-8%</span>
+                                <span>Moderate: 10-12%</span>
+                                <span>Aggressive: 14-18%</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Time Period (Years)</label>
+                            <input type="number" id="years" value="10" min="1" max="40" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none text-lg">
+                        </div>
+
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                            <label class="flex items-center cursor-pointer">
+                                <input type="checkbox" id="stepUp" class="mr-3 w-5 h-5">
+                                <span class="font-semibold text-gray-700">Enable Step-up SIP</span>
+                            </label>
+                            <div id="stepUpInput" class="mt-3 hidden">
+                                <label class="block text-gray-600 text-sm mb-2">Annual Increase (%)</label>
+                                <input type="number" id="stepUpRate" value="10" min="5" max="20" class="w-full px-3 py-2 border-2 border-gray-300 rounded-lg">
+                            </div>
+                        </div>
+
+                        <button id="calculateBtn" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 rounded-lg text-lg transition transform hover:scale-105">
+                            Calculate Returns
+                        </button>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <button id="shareBtn" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition hidden">
+                                📤 Share
+                            </button>
+                            <button id="exportBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition hidden">
+                                📥 Export
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Panel -->
+                <div id="resultsPanel" class="hidden">
+                    <div id="resultsSummary" class="bg-gradient-to-br from-green-500 to-blue-600 rounded-2xl shadow-2xl p-6 text-white mb-6 animate-slide-up">
+                        <h2 class="text-2xl font-bold mb-6 text-center">Investment Summary</h2>
+                        
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-white bg-opacity-20 rounded-xl p-4">
+                                <div class="text-sm opacity-90 mb-1">Total Investment</div>
+                                <div class="text-2xl font-bold" id="totalInvested">₹0</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-xl p-4">
+                                <div class="text-sm opacity-90 mb-1">Est. Returns</div>
+                                <div class="text-2xl font-bold" id="totalReturns">₹0</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white bg-opacity-30 rounded-xl p-6 text-center">
+                            <div class="text-sm opacity-90 mb-2">MATURITY VALUE</div>
+                            <div class="text-5xl font-bold mb-2" id="maturityValue">₹0</div>
+                            <div class="text-sm opacity-90" id="monthlyBreakdown"></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <canvas id="investmentChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Goal Planning Mode -->
+        <div id="goalMode" class="mode-content hidden">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">🎯 Set Your Financial Goal</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Target Amount (₹)</label>
+                            <input type="number" id="targetAmount" value="10000000" min="100000" step="100000" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none text-lg">
+                            <div class="text-xs text-gray-500 mt-1">Common goals: ₹50L (House), ₹1Cr (Retirement)</div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Time to Achieve (Years)</label>
+                            <input type="number" id="goalYears" value="15" min="1" max="40" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none text-lg">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Expected Return Rate (% p.a.)</label>
+                            <input type="number" id="goalReturn" value="12" min="6" max="18" step="0.5" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none text-lg">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Current Monthly SIP (₹) <span class="text-sm font-normal text-gray-500">(Optional)</span></label>
+                            <input type="number" id="currentSIP" value="0" min="0" step="500" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none text-lg">
+                        </div>
+
+                        <button id="calculateGoalBtn" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-4 rounded-lg text-lg transition transform hover:scale-105">
+                            Calculate Required SIP
+                        </button>
+                    </div>
+                </div>
+
+                <div id="goalResults" class="hidden">
+                    <div class="bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl shadow-2xl p-6 text-white mb-6 animate-slide-up">
+                        <h2 class="text-2xl font-bold mb-6 text-center">Required Investment</h2>
+                        
+                        <div class="bg-white bg-opacity-30 rounded-xl p-6 text-center mb-4">
+                            <div class="text-sm opacity-90 mb-2">MONTHLY SIP REQUIRED</div>
+                            <div class="text-5xl font-bold mb-2" id="requiredSIP">₹0</div>
+                        </div>
+
+                        <div id="sipGap" class="bg-red-100 text-red-800 rounded-xl p-4 mb-4 hidden">
+                            <div class="font-bold mb-1">⚠️ You're Short!</div>
+                            <div class="text-sm">Increase your SIP by <span id="gapAmount" class="font-bold"></span>/month</div>
+                        </div>
+
+                        <div id="sipExcess" class="bg-green-100 text-green-800 rounded-xl p-4 mb-4 hidden">
+                            <div class="font-bold mb-1">✅ You're On Track!</div>
+                            <div class="text-sm">You're investing <span id="excessAmount" class="font-bold"></span>/month extra</div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                                <div class="text-xs opacity-90">Total Investment</div>
+                                <div class="text-lg font-bold" id="goalTotalInvested">₹0</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                                <div class="text-xs opacity-90">Expected Returns</div>
+                                <div class="text-lg font-bold" id="goalTotalReturns">₹0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <h3 class="font-bold text-gray-800 mb-4">💡 Quick Tips</h3>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li>• Start early: Even ₹1000/month at age 25 beats ₹5000/month at age 35</li>
+                            <li>• Enable step-up: Increase SIP by 10% annually as income grows</li>
+                            <li>• Stay consistent: Don't stop SIP during market downturns</li>
+                            <li>• Review annually: Adjust target and returns based on progress</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compare Scenarios Mode -->
+        <div id="compareMode" class="mode-content hidden">
+            <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+                <h2 class="text-xl font-bold text-gray-800 mb-6">📊 Compare Different Scenarios</h2>
+                
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Base Monthly SIP (₹)</label>
+                        <input type="number" id="baseMonthly" value="5000" min="500" step="500" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Return Rate (% p.a.)</label>
+                        <input type="number" id="baseReturn" value="12" min="6" max="18" step="0.5" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Time Period (Years)</label>
+                        <input type="number" id="baseYears" value="15" min="1" max="40" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <button id="compareBtn" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 rounded-lg text-lg transition">
+                    Compare All Scenarios
+                </button>
+            </div>
+
+            <div id="comparisonResults" class="hidden">
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <!-- Scenario cards will be inserted here -->
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Visual Comparison</h3>
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Track Progress Mode -->
+        <div id="trackMode" class="mode-content hidden">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">📈 Track Your Investment Progress</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Planned Monthly SIP (₹)</label>
+                            <input type="number" id="plannedSIP" value="5000" min="500" step="500" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none text-lg">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Actual Invested This Month (₹)</label>
+                            <input type="number" id="actualSIP" value="0" min="0" step="500" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none text-lg">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Current Portfolio Value (₹)</label>
+                            <input type="number" id="currentValue" value="0" min="0" step="1000" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none text-lg">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Total Invested Till Date (₹)</label>
+                            <input type="number" id="totalInvestedTillDate" value="0" min="0" step="1000" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none text-lg">
+                        </div>
+
+                        <button id="trackBtn" class="w-full bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white font-bold py-4 rounded-lg text-lg transition transform hover:scale-105">
+                            Update Progress
+                        </button>
+
+                        <button id="saveTrackingBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition">
+                            💾 Save Progress (Browser Storage)
+                        </button>
+                    </div>
+                </div>
+
+                <div id="trackingResults" class="hidden">
+                    <div class="bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl shadow-2xl p-6 text-white mb-6 animate-slide-up">
+                        <h2 class="text-2xl font-bold mb-6 text-center">Your Progress</h2>
+                        
+                        <div id="adherenceStatus" class="bg-white bg-opacity-30 rounded-xl p-4 mb-4 text-center">
+                            <div class="text-sm opacity-90 mb-2">ADHERENCE TO PLAN</div>
+                            <div class="text-4xl font-bold mb-2" id="adherencePercent">0%</div>
+                            <div class="text-sm" id="adherenceMessage"></div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                                <div class="text-xs opacity-90">Actual Returns</div>
+                                <div class="text-lg font-bold" id="actualReturns">₹0</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                                <div class="text-xs opacity-90">Return %</div>
+                                <div class="text-lg font-bold" id="returnPercent">0%</div>
+                            </div>
+                        </div>
+
+                        <div id="deviationAlert" class="bg-red-100 text-red-800 rounded-xl p-4 hidden">
+                            <div class="font-bold mb-1">⚠️ Behind Schedule</div>
+                            <div class="text-sm" id="deviationText"></div>
+                        </div>
+
+                        <div id="onTrackAlert" class="bg-green-100 text-green-800 rounded-xl p-4 hidden">
+                            <div class="font-bold mb-1">✅ On Track!</div>
+                            <div class="text-sm">Keep up the consistent investing</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <h3 class="font-bold text-gray-800 mb-4">📅 Monthly Checklist</h3>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li class="flex items-center">
+                                <span class="mr-2">⬜</span> Invest planned SIP amount
+                            </li>
+                            <li class="flex items-center">
+                                <span class="mr-2">⬜</span> Check portfolio value
+                            </li>
+                            <li class="flex items-center">
+                                <span class="mr-2">⬜</span> Update tracking here
+                            </li>
+                            <li class="flex items-center">
+                                <span class="mr-2">⬜</span> Review and adjust if needed
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mt-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">📚 About SIP Investment</h2>
+            <div class="grid md:grid-cols-2 gap-6 text-gray-700">
+                <div>
+                    <h3 class="font-bold text-lg mb-2">What is SIP?</h3>
+                    <p class="text-sm mb-4">Systematic Investment Plan (SIP) allows you to invest a fixed amount regularly in mutual funds. It's a disciplined way to build wealth through rupee cost averaging and power of compounding.</p>
+                    
+                    <h3 class="font-bold text-lg mb-2">Why SIP?</h3>
+                    <ul class="text-sm space-y-1">
+                        <li>• Disciplined investing habit</li>
+                        <li>• Rupee cost averaging reduces risk</li>
+                        <li>• Power of compounding over time</li>
+                        <li>• Flexible: Start with ₹500/month</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-2">Expected Returns</h3>
+                    <ul class="text-sm space-y-1 mb-4">
+                        <li>• Equity funds: 12-15% (long-term)</li>
+                        <li>• Balanced funds: 10-12%</li>
+                        <li>• Debt funds: 7-9%</li>
+                        <li>• Conservative: 6-8%</li>
+                    </ul>
+                    
+                    <h3 class="font-bold text-lg mb-2">Pro Tips</h3>
+                    <ul class="text-sm space-y-1">
+                        <li>• Start early, even with small amounts</li>
+                        <li>• Enable step-up SIP (increase 10% annually)</li>
+                        <li>• Don't stop during market crashes</li>
+                        <li>• Review portfolio annually</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-600 text-sm mt-8">
+            <p class="mb-2">
+                <a href="/" class="hover:text-indigo-600 underline">Home</a> | 
+                <a href="/tools/" class="hover:text-indigo-600 underline">All Tools</a> | 
+                <a href="/blog/" class="hover:text-indigo-600 underline">Blog</a>
+            </p>
+            <p class="text-xs text-gray-500">This calculator provides estimates only. Consult a financial advisor for personalized advice. Past performance doesn't guarantee future returns.</p>
+        </footer>
+    </div>
+
+    <script>
+        let investmentChart = null;
+        let comparisonChart = null;
+
+        // GA4 Event Tracking
+        function trackEvent(action, category, label) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', action, {
+                    'event_category': category,
+                    'event_label': label
+                });
+            }
+        }
+
+        // Mode Switching
+        document.querySelectorAll('.mode-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const mode = tab.dataset.mode;
+                trackEvent('mode_switch', 'Navigation', mode);
+                document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                document.querySelectorAll('.mode-content').forEach(c => c.classList.add('hidden'));
+                document.getElementById(`${mode}Mode`).classList.remove('hidden');
+            });
+        });
+
+        // Return rate slider sync
+        document.getElementById('returnSlider').addEventListener('input', (e) => {
+            document.getElementById('returnRate').value = e.target.value;
+        });
+        document.getElementById('returnRate').addEventListener('input', (e) => {
+            document.getElementById('returnSlider').value = e.target.value;
+        });
+
+        // Step-up toggle
+        document.getElementById('stepUp').addEventListener('change', (e) => {
+            document.getElementById('stepUpInput').classList.toggle('hidden', !e.target.checked);
+            trackEvent('toggle_stepup', 'Interaction', e.target.checked ? 'enabled' : 'disabled');
+        });
+
+        // Calculate Returns
+        document.getElementById('calculateBtn').addEventListener('click', () => {
+            calculateReturns();
+            trackEvent('calculate_sip', 'Calculation', 'basic_mode');
+        });
+
+        function calculateReturns() {
+            const monthly = parseFloat(document.getElementById('monthly').value);
+            const rate = parseFloat(document.getElementById('returnRate').value) / 100;
+            const years = parseFloat(document.getElementById('years').value);
+            const stepUp = document.getElementById('stepUp').checked;
+            const stepUpRate = stepUp ? parseFloat(document.getElementById('stepUpRate').value) / 100 : 0;
+
+            let totalInvested = 0;
+            let maturityValue = 0;
+            let currentMonthly = monthly;
+
+            const monthlyRate = rate / 12;
+            const months = years * 12;
+
+            if (!stepUp) {
+                totalInvested = monthly * months;
+                maturityValue = monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+            } else {
+                for (let year = 0; year < years; year++) {
+                    const yearlyMonths = 12;
+                    const yearInvestment = currentMonthly * yearlyMonths;
+                    totalInvested += yearInvestment;
+                    
+                    const futureValue = currentMonthly * ((Math.pow(1 + monthlyRate, yearlyMonths) - 1) / monthlyRate) * (1 + monthlyRate);
+                    maturityValue = (maturityValue + futureValue) * Math.pow(1 + monthlyRate, yearlyMonths);
+                    
+                    currentMonthly = currentMonthly * (1 + stepUpRate);
+                }
+            }
+
+            const returns = maturityValue - totalInvested;
+
+            document.getElementById('totalInvested').textContent = formatCurrency(totalInvested);
+            document.getElementById('totalReturns').textContent = formatCurrency(returns);
+            document.getElementById('maturityValue').textContent = formatCurrency(maturityValue);
+            document.getElementById('monthlyBreakdown').textContent = `Monthly contribution: ₹${monthly.toLocaleString('en-IN')}${stepUp ? ' (with ' + (stepUpRate*100) + '% annual increase)' : ''}`;
+
+            document.getElementById('resultsPanel').classList.remove('hidden');
+            document.getElementById('shareBtn').classList.remove('hidden');
+            document.getElementById('exportBtn').classList.remove('hidden');
+
+            drawChart(totalInvested, returns);
+        }
+
+        function formatCurrency(amount) {
+            return '₹' + amount.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+        }
+
+        function drawChart(invested, returns) {
+            const ctx = document.getElementById('investmentChart');
+            if (investmentChart) investmentChart.destroy();
+
+            investmentChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Total Investment', 'Expected Returns'],
+                    datasets: [{
+                        data: [invested, returns],
+                        backgroundColor: ['#6366f1', '#10b981'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { font: { size: 14 }, padding: 20 }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + formatCurrency(context.parsed);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Share functionality with URL parameters
+        document.getElementById('shareBtn').addEventListener('click', () => {
+            const monthly = document.getElementById('monthly').value;
+            const rate = document.getElementById('returnRate').value;
+            const years = document.getElementById('years').value;
+            const stepUp = document.getElementById('stepUp').checked;
+            const stepUpRate = document.getElementById('stepUpRate').value;
+            
+            const url = `${window.location.origin}${window.location.pathname}?m=${monthly}&r=${rate}&y=${years}&s=${stepUp}&sr=${stepUpRate}`;
+            
+            trackEvent('share_calculation', 'Engagement', 'sip_share');
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My SIP Calculation',
+                    text: `Check out my SIP calculation: ₹${monthly}/month for ${years} years at ${rate}% returns`,
+                    url: url
+                });
+            } else {
+                navigator.clipboard.writeText(url);
+                alert('Link copied to clipboard! Share it with anyone.');
+            }
+        });
+
+        // Export to PDF functionality
+        document.getElementById('exportBtn').addEventListener('click', async () => {
+            trackEvent('export_pdf', 'Engagement', 'sip_export');
+            
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+            
+            const monthly = document.getElementById('monthly').value;
+            const rate = document.getElementById('returnRate').value;
+            const years = document.getElementById('years').value;
+            const totalInv = document.getElementById('totalInvested').textContent;
+            const totalRet = document.getElementById('totalReturns').textContent;
+            const maturity = document.getElementById('maturityValue').textContent;
+            
+            pdf.setFontSize(20);
+            pdf.text('SIP Calculator Results', 20, 20);
+            
+            pdf.setFontSize(12);
+            pdf.text(`Monthly Investment: ₹${parseFloat(monthly).toLocaleString('en-IN')}`, 20, 40);
+            pdf.text(`Expected Return: ${rate}% p.a.`, 20, 50);
+            pdf.text(`Time Period: ${years} years`, 20, 60);
+            
+            pdf.setFontSize(14);
+            pdf.text('Summary:', 20, 80);
+            pdf.setFontSize(12);
+            pdf.text(`Total Invested: ${totalInv}`, 20, 90);
+            pdf.text(`Expected Returns: ${totalRet}`, 20, 100);
+            pdf.text(`Maturity Value: ${maturity}`, 20, 110);
+            
+            pdf.setFontSize(10);
+            pdf.text('Generated at ToolsForIndia.com', 20, 130);
+            pdf.text(new Date().toLocaleDateString('en-IN'), 20, 140);
+            
+            pdf.save('SIP-Calculation.pdf');
+        });
+
+        // Load from URL parameters
+        window.addEventListener('load', () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('m')) {
+                document.getElementById('monthly').value = params.get('m');
+                document.getElementById('returnRate').value = params.get('r');
+                document.getElementById('returnSlider').value = params.get('r');
+                document.getElementById('years').value = params.get('y');
+                if (params.get('s') === 'true') {
+                    document.getElementById('stepUp').checked = true;
+                    document.getElementById('stepUpInput').classList.remove('hidden');
+                    if (params.has('sr')) {
+                        document.getElementById('stepUpRate').value = params.get('sr');
+                    }
+                }
+                calculateReturns();
+            }
+        });
+
+        // Goal Planning
+        document.getElementById('calculateGoalBtn').addEventListener('click', () => {
+            calculateGoal();
+            trackEvent('calculate_goal', 'Calculation', 'goal_mode');
+        });
+
+        function calculateGoal() {
+            const target = parseFloat(document.getElementById('targetAmount').value);
+            const years = parseFloat(document.getElementById('goalYears').value);
+            const rate = parseFloat(document.getElementById('goalReturn').value) / 100;
+            const currentSIP = parseFloat(document.getElementById('currentSIP').value);
+
+            const monthlyRate = rate / 12;
+            const months = years * 12;
+
+            const requiredSIP = (target * monthlyRate) / ((Math.pow(1 + monthlyRate, months) - 1) * (1 + monthlyRate));
+            
+            const totalInvested = requiredSIP * months;
+            const returns = target - totalInvested;
+
+            document.getElementById('requiredSIP').textContent = formatCurrency(requiredSIP);
+            document.getElementById('goalTotalInvested').textContent = formatCurrency(totalInvested);
+            document.getElementById('goalTotalReturns').textContent = formatCurrency(returns);
+
+            if (currentSIP > 0) {
+                const gap = requiredSIP - currentSIP;
+                if (gap > 0) {
+                    document.getElementById('sipGap').classList.remove('hidden');
+                    document.getElementById('sipExcess').classList.add('hidden');
+                    document.getElementById('gapAmount').textContent = formatCurrency(gap);
+                } else {
+                    document.getElementById('sipGap').classList.add('hidden');
+                    document.getElementById('sipExcess').classList.remove('hidden');
+                    document.getElementById('excessAmount').textContent = formatCurrency(Math.abs(gap));
+                }
+            } else {
+                document.getElementById('sipGap').classList.add('hidden');
+                document.getElementById('sipExcess').classList.add('hidden');
+            }
+
+            document.getElementById('goalResults').classList.remove('hidden');
+        }
+
+        // Compare Scenarios
+        document.getElementById('compareBtn').addEventListener('click', () => {
+            compareScenarios();
+            trackEvent('compare_scenarios', 'Calculation', 'compare_mode');
+        });
+
+        function compareScenarios() {
+            const baseMonthly = parseFloat(document.getElementById('baseMonthly').value);
+            const baseReturn = parseFloat(document.getElementById('baseReturn').value);
+            const baseYears = parseFloat(document.getElementById('baseYears').value);
+
+            const scenarios = [
+                { name: 'Base Scenario', monthly: baseMonthly, rate: baseReturn, years: baseYears, color: 'indigo' },
+                { name: '2x Investment', monthly: baseMonthly * 2, rate: baseReturn, years: baseYears, color: 'green' },
+                { name: '5 Years Earlier', monthly: baseMonthly, rate: baseReturn, years: baseYears + 5, color: 'blue' },
+                { name: 'Higher Returns (+3%)', monthly: baseMonthly, rate: baseReturn + 3, years: baseYears, color: 'purple' }
+            ];
+
+            const results = scenarios.map(s => {
+                const monthlyRate = (s.rate / 100) / 12;
+                const months = s.years * 12;
+                const invested = s.monthly * months;
+                const maturity = s.monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+                const returns = maturity - invested;
+                return { ...s, invested, maturity, returns };
+            });
+
+            const container = document.querySelector('#comparisonResults .grid');
+            container.innerHTML = results.map(r => `
+                <div class="comparison-card bg-white rounded-xl shadow-lg p-6 border-l-4 border-${r.color}-500">
+                    <h3 class="font-bold text-gray-800 mb-3">${r.name}</h3>
+                    <div class="space-y-2 text-sm">
+                        <div>
+                            <span class="text-gray-600">Monthly:</span>
+                            <span class="font-semibold">${formatCurrency(r.monthly)}</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Years:</span>
+                            <span class="font-semibold">${r.years}</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Rate:</span>
+                            <span class="font-semibold">${r.rate}%</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <div class="text-xs text-gray-600 mb-1">Maturity Value</div>
+                        <div class="text-2xl font-bold text-${r.color}-600">${formatCurrency(r.maturity)}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            drawComparisonChart(results);
+            document.getElementById('comparisonResults').classList.remove('hidden');
+        }
+
+        function drawComparisonChart(results) {
+            const ctx = document.getElementById('comparisonChart');
+            if (comparisonChart) comparisonChart.destroy();
+
+            comparisonChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: results.map(r => r.name),
+                    datasets: [
+                        {
+                            label: 'Investment',
+                            data: results.map(r => r.invested),
+                            backgroundColor: '#6366f1'
+                        },
+                        {
+                            label: 'Returns',
+                            data: results.map(r => r.returns),
+                            backgroundColor: '#10b981'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: { stacked: true },
+                        y: { 
+                            stacked: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '₹' + (value / 100000).toFixed(0) + 'L';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + formatCurrency(context.parsed.y);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Track Progress
+        document.getElementById('trackBtn').addEventListener('click', () => {
+            trackProgress();
+            trackEvent('track_progress', 'Calculation', 'track_mode');
+        });
+
+        function trackProgress() {
+            const planned = parseFloat(document.getElementById('plannedSIP').value);
+            const actual = parseFloat(document.getElementById('actualSIP').value);
+            const currentValue = parseFloat(document.getElementById('currentValue').value);
+            const totalInvested = parseFloat(document.getElementById('totalInvestedTillDate').value);
+
+            const adherence = (actual / planned) * 100;
+            const actualReturns = currentValue - totalInvested;
+            const returnPercent = totalInvested > 0 ? (actualReturns / totalInvested) * 100 : 0;
+
+            document.getElementById('adherencePercent').textContent = adherence.toFixed(0) + '%';
+            document.getElementById('actualReturns').textContent = formatCurrency(actualReturns);
+            document.getElementById('returnPercent').textContent = returnPercent.toFixed(1) + '%';
+
+            if (adherence >= 100) {
+                document.getElementById('adherenceMessage').textContent = '✅ Perfect adherence!';
+                document.getElementById('onTrackAlert').classList.remove('hidden');
+                document.getElementById('deviationAlert').classList.add('hidden');
+            } else if (adherence >= 80) {
+                document.getElementById('adherenceMessage').textContent = '👍 Good progress';
+                document.getElementById('onTrackAlert').classList.remove('hidden');
+                document.getElementById('deviationAlert').classList.add('hidden');
+            } else {
+                const shortfall = planned - actual;
+                document.getElementById('adherenceMessage').textContent = '⚠️ Below target';
+                document.getElementById('deviationAlert').classList.remove('hidden');
+                document.getElementById('onTrackAlert').classList.add('hidden');
+                document.getElementById('deviationText').textContent = `You're short by ${formatCurrency(shortfall)} this month. Try to catch up next month.`;
+            }
+
+            document.getElementById('trackingResults').classList.remove('hidden');
+        }
+
+        // Save tracking data
+        document.getElementById('saveTrackingBtn').addEventListener('click', () => {
+            const data = {
+                planned: document.getElementById('plannedSIP').value,
+                actual: document.getElementById('actualSIP').value,
+                currentValue: document.getElementById('currentValue').value,
+                totalInvested: document.getElementById('totalInvestedTillDate').value,
+                lastUpdated: new Date().toISOString()
+            };
+            localStorage.setItem('sipTracking', JSON.stringify(data));
+            alert('✅ Progress saved! It will be loaded automatically next time.');
+            trackEvent('save_tracking', 'Engagement', 'track_save');
+        });
+
+        // Load saved tracking data
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('sipTracking');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('plannedSIP').value = data.planned;
+                document.getElementById('actualSIP').value = data.actual;
+                document.getElementById('currentValue').value = data.currentValue;
+                document.getElementById('totalInvestedTillDate').value = data.totalInvested;
+            }
+        });
+    </script>
+</body>
+</html>
